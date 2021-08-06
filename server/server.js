@@ -1,6 +1,6 @@
 // Server config
 const express = require('express');
-const { fstat } = require('fs');
+const fs = require('fs');
 const app = express();
 const server = require('http').createServer(app);
 
