@@ -5,7 +5,7 @@ const app = express();
 const server = require('http').createServer(app);
 
 // Database config
-fs.readFile('/database/books.json', 'utf-8', (err, jsonString) => {
+fs.readFile('./database/books.json', 'utf-8', (err, jsonString) => {
     if (err) {
         console.log(err)
     } else {
