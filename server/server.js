@@ -6,7 +6,7 @@ const server = require('http').createServer(app);
 // Database config
 var books = []
 
-fetch('local_db/books.json')
+fetch('database/books.json')
     .then(response => response.json())
     .then(json => books = json)
 
