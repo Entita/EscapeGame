@@ -1,5 +1,62 @@
 * {
-    margin: 0;
-    padding: 0;
+    margin    : 0;
+    padding   : 0;
     box-sizing: border-box;
+    cursor    : none;
+}
+
+.cursor {
+    width        : 20px;
+    height       : 20px;
+    border       : 1px solid white;
+    border-radius: 50%;
+    position     : absolute;
+}
+
+
+
+:root {
+    --white               : #e6e6e6;
+    --darkest-blue-color  : #071e26;
+    --greyish-blue-color  : #06394c;
+    --bright-blue-color   : #0c4383;
+    --turquoise-blue-color: #22a0b6;
+    --palest-blue-color   : #6a96b9;
+}
+
+#game {
+    background-color: var(--darkest-blue-color);
+}
+
+
+/* SVG's */
+svg {
+    width : 100%;
+    height: 100vh;
+    margin: 0 auto;
+}
+
+.unlocked {
+    opacity: 0;
+}
+
+.st0 {
+    fill: #e6e6e6;
+}
+
+.st1 {
+    fill             : #e6e6e6;
+    stroke           : #000000;
+    stroke-width     : 0.2578;
+    stroke-miterlimit: 10;
+}
+
+.st2 {
+    fill        : #e6e6e6;
+    fill-opacity: 0;
+}
+
+#padlock {
+    stroke: white;
+    fill  : var(--darkest-blue-color);
 }
