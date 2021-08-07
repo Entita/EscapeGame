@@ -5,16 +5,6 @@
     cursor    : none;
 }
 
-.cursor {
-    width        : 20px;
-    height       : 20px;
-    border       : 1px solid white;
-    border-radius: 50%;
-    position     : absolute;
-}
-
-
-
 :root {
     --white               : #e6e6e6;
     --darkest-blue-color  : #071e26;
@@ -24,39 +14,148 @@
     --palest-blue-color   : #6a96b9;
 }
 
-#game {
+body {
+    background-color: var(--darkest-blue-color);
+    overflow        : hidden;
+}
+
+.cursor {
+    width         : 20px;
+    height        : 20px;
+    border        : 1px solid white;
+    border-radius : 50%;
+    position      : absolute;
+    z-index       : 999;
+    pointer-events: none;
+    box-shadow    : 1px 1px 5px black;
+    transition    : transform .4s ease;
+}
+
+.cursor.expand {
+    transform: scale(2);
+}
+
+.inventory-control {
+    position     : fixed;
+    bottom       : 0;
+    left         : 50%;
+    transform    : translate(-50%, 0);
+    width        : 54px;
+    height       : 24px;
+    overflow     : hidden;
+    transition   : bottom .6s ease, filter .3s ease;
+    z-index      : 998;
+    animation: attentionSeeker 6s infinite alternate;
+}
+
+@keyframes attentionSeeker {
+    0%, 25% {
+        transform: translate(-50%, 0) rotate(0) scale(1);
+    } 45% {
+        transform: translate(-50%, 0) rotate(5deg);
+    } 60% {
+        transform: translate(-50%, 0) rotate(-5deg);
+    } 75% {
+        transform: translate(-50%, 0) rotate(0) scale(1);
+    } 85% {
+        transform: translate(-50%, 0) rotate(0) scale(1.3);
+    } 95%, 100% {
+        transform: translate(-50%, 0) rotate(0) scale(1);
+    }
+}
+
+.inventory-control.open {
+    bottom: 83px;
+    animation: none;
+}
+
+.inventory-control:hover {
+    filter: brightness(.7);
+}
+
+.inventory-control::before {
+    content         : '';
+    position        : absolute;
+    top             : 8px;
+    left            : 5px;
+    width           : 44px;
+    height          : 44px;
+    transform       : rotate(45deg);
+    background-color: var(--white);
+}
+
+.inventory-control::after {
+    content         : '';
+    position        : absolute;
+    top             : 16px;
+    left            : 5px;
+    width           : 44px;
+    height          : 44px;
+    transform       : rotate(45deg);
     background-color: var(--darkest-blue-color);
 }
 
+.inventory {
+    position       : fixed;
+    bottom         : -83px;
+    left           : calc(50% - 3px);
+    transform      : translate(calc(-50% - 3px), 0);
+    display        : flex;
+    gap            : 1rem;
+    padding        : .5rem;
+    border         : 3px solid var(--palest-blue-color);
+    border-bottom  : none;
+    border-radius  : 10px 10px 0 0;
+    z-index        : 99;
+    backdrop-filter: blur(3px);
+    transition     : bottom .6s ease;
+}
+
+.inventory.open {
+    bottom: 0;
+}
+
+.inventory img:not(:first-child) {
+    padding-left: 3px;
+    border-left : 3px solid var(--palest-blue-color);
+}
+
+.inventory img:hover {
+    transition: filter .3s ease;
+    filter    : brightness(.6);
+}
 
 /* SVG's */
+
 svg {
-    width : 100%;
-    height: 100vh;
-    margin: 0 auto;
+    width    : calc(100% - 5rem);
+    position : absolute;
+    top      : 50%;
+    transform: translate(0, -50%);
 }
 
-.unlocked {
-    opacity: 0;
+svg * {
+    transition: stroke .4s ease, fill .4s ease;
 }
 
-.st0 {
-    fill: #e6e6e6;
+.stroke-color {
+    stroke: var(--white);
 }
 
-.st1 {
-    fill             : #e6e6e6;
-    stroke           : #000000;
-    stroke-width     : 0.2578;
-    stroke-miterlimit: 10;
+.fill-color {
+    fill: var(--white);
 }
 
-.st2 {
-    fill        : #e6e6e6;
-    fill-opacity: 0;
+/* Mirror */
+#Outer-frame {
+    fill: var(--darkest-blue-color);
 }
 
-#padlock {
-    stroke: white;
-    fill  : var(--darkest-blue-color);
+#Mirror *:not(#Outer-frame) {
+    pointer-events: none;
+}
+
+/* Door */
+#Knob {
+    fill: var(--darkest-blue-color);
 }
