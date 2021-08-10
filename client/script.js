@@ -2,6 +2,7 @@ var app = new Vue({
     el: '#game',
     data() {
         return {
+            socket: {},
             colors: {
                 white: '#e6e6e6',
                 darkestBlueColor: '#071e26',
@@ -30,10 +31,17 @@ var app = new Vue({
         }
     },
     created() {
-        const cursor = document.querySelector('.cursor')
+        this.socket = io('https://gentle-island-28675.herokuapp.com/', { transports: ['websocket'] })
+
+        const cursor = document.querySelector('.cursor'),
+            this_ = this
 
         document.addEventListener('mousemove', e => {
             cursor.setAttribute("style", "top:" + (e.pageY - 10) + "px; left:" + (e.pageX - 10) + "px")
+        })
+
+        this_.socket.on('connected', id => {
+            console.log(id)
         })
     },
     methods: {
