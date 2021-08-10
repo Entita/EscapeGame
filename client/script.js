@@ -22,7 +22,11 @@ var app = new Vue({
                     name: 'Note',
                     src: 'img/notepad.png'
                 }
-            ]
+            ],
+            visibility: {
+                openLockContainer: false,
+                openDoor: false
+            }
         }
     },
     created() {
@@ -33,6 +37,19 @@ var app = new Vue({
         })
     },
     methods: {
+        sendMessage(text, type) {
+            const messageBox = document.querySelector('.message-container')
+            var message = document.createElement('div')
+            message.classList.add('message', type)
+            message.innerHTML = text
+            messageBox.appendChild(message)
+            setTimeout(() => {
+                message.classList.add('fadeOut')
+                setTimeout(() => {
+                    message.remove()
+                }, 400)
+            }, 2400)
+        },
         openInventory(e) {
             if (e.target.classList.contains('open')) {
                 e.target.classList.remove('open')
@@ -43,7 +60,7 @@ var app = new Vue({
             }
         },
         toColor(selectors, color, type) {
-            var item = document.querySelectorAll(selectors);
+            const item = document.querySelectorAll(selectors);
             item.forEach(function (i) {
                 if (type === 'stroke') {
                     i.style.stroke = color;
@@ -71,20 +88,102 @@ var app = new Vue({
             this.toColor("#Mirror *", this.colors.white, 'stroke');
         },
 
+        rotateMirror() {
+            var mirror = document.getElementById('Mirror')
+            if (mirror.style.transform === 'rotate(20deg) translate(25px, 5px)') {
+                mirror.style.transform = 'rotate(0)'
+            } else if (mirror.style.transform === 'rotate(20deg) translate(5px, -100px)') {
+                mirror.style.transition = 'transform .4s ease'
+                mirror.style.transform = 'rotate(0)'
+                setTimeout(() => {
+                    mirror.style.transition = 'none'
+                }, 400)
+            } else {
+                if (document.getElementById('first_room').classList.contains('zoomed')) {
+                    mirror.style.transition = 'transform .4s ease'
+                    mirror.style.transform = 'rotate(20deg) translate(5px, -100px)'
+                    setTimeout(() => {
+                        mirror.style.transition = 'none'
+                    }, 400)
+                } else {
+                    mirror.style.transform = 'rotate(20deg) translate(25px, 5px)'
+                }
+            }
+        },
+
         doorKnobToColor() {
-            this.toColor("#Knob", this.colors.darkMagentaColor, 'stroke');
+            this.toColor("#Knob, #Open-knob", this.colors.darkMagentaColor, 'stroke');
         },
 
         doorKnobToWhite() {
-            this.toColor("#Knob", this.colors.white, 'stroke');
+            this.toColor("#Knob, #Open-knob", this.colors.white, 'stroke');
         },
         drawerKnobToColor(e) {
-            var clickedElement = e.target.id
+            const clickedElement = e.target.id
             this.toColor("#" + clickedElement, this.colors.turquoiseBlueColor, 'fill');
         },
         drawerKnobToWhite(e) {
-            var clickedElement = e.target.id
+            const clickedElement = e.target.id
             this.toColor("#" + clickedElement, this.colors.white, 'fill');
+        },
+        noteToColor(e) {
+            const clickedElement = e.target.id
+            this.toColor("#" + clickedElement, this.colors.pinkColor, 'stroke');
+        },
+        noteToWhite(e) {
+            const clickedElement = e.target.id
+            this.toColor("#" + clickedElement, this.colors.white, 'stroke');
+        },
+        openNote(e) {
+            this.sendMessage('Password to my lock is 5935', 'info')
+            // this.visibility.openLockContainer = true
+            this.zoomIn(e.target, 2)
+        },
+        openDrawer(e) {
+            const clickedDrawer = 'Open-Drawer' + e.target.id.slice(-1)
+            document.getElementById(clickedDrawer).style.visibility = "visible"
+        },
+        closeDrawer(e) {
+            const clickedDrawer = 'Open-Drawer' + e.target.id.slice(-1)
+            document.getElementById(clickedDrawer).style.visibility = "hidden"
+        },
+        openDoor(e) {
+            this.visibility.openDoor = true
+        },
+        closeDoor(e) {
+            this.visibility.openDoor = false
+        },
+        zoomIn(elem, zoomLevel) {
+            var svg = document.getElementById('first_room'),
+                mirror = document.getElementById('Mirror'),
+                viewbox = svg.viewBox.baseVal
+            if (svg.classList.contains('zoomed')) {
+                var new_width = 1280,
+                    new_height = 580,
+                    new_x = 0,
+                    new_y = 0
+                mirror.style.transform = 'rotate(20deg) translate(25px, 5px)'
+                setTimeout(() => {
+                    mirror.style.transition = 'transform .4s ease'
+                }, 1)
+            } else {
+                var elemBox = elem.getBBox(),
+
+                    elem_center_x = elemBox.x + elemBox.width / 2,
+                    elem_center_y = elemBox.y + elemBox.height / 2,
+
+                    new_width = viewbox.width / zoomLevel,
+                    new_height = viewbox.height / zoomLevel,
+                    new_x = elem_center_x - new_width / 2,
+                    new_y = elem_center_y - new_height / 2
+                mirror.style.transition = 'none'
+                mirror.style.transform = 'rotate(20deg) translate(5px, -100px)'
+            }
+            svg.viewBox.baseVal.x = new_x
+            svg.viewBox.baseVal.y = new_y
+            svg.viewBox.baseVal.width = new_width
+            svg.viewBox.baseVal.height = new_height
+            svg.classList.toggle('zoomed')
         }
     }
 })
