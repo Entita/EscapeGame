@@ -31,7 +31,7 @@ var app = new Vue({
         }
     },
     created() {
-        this.socket = io('https://gentle-island-28675.herokuapp.com/', { transports: ['websocket'] })
+        this.socket = io('https://escape-game-cz.herokuapp.com', { transports: ['websocket'] })
 
         const cursor = document.querySelector('.cursor'),
             this_ = this
