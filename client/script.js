@@ -42,6 +42,10 @@ var app = new Vue({
             cursor.setAttribute("style", "top:" + (e.pageY - 10) + "px; left:" + (e.pageX - 10) + "px")
         })
 
+        document.addEventListener('mouseleave', () => {
+            cursor.setAttribute("style", "top: -20px")
+        })
+
         /* Socket.io */
         this_.socket.on('connected', id => {
             console.log(id)
