@@ -43,7 +43,7 @@ var app = new Vue({
         })
 
         document.addEventListener('mouseleave', () => {
-            cursor.setAttribute("style", "top: -20px")
+            cursor.setAttribute("style", "top: -25px")
         })
 
         /* Socket.io */
