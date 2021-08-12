@@ -1,5 +1,5 @@
 var app = new Vue({
-    el: '#game',
+    el: '#app',
     data() {
         return {
             socket: {},
@@ -25,21 +25,24 @@ var app = new Vue({
                 }
             ],
             visibility: {
+                playIntro: true,
                 openLockContainer: false,
                 openDoor: false
             }
         }
     },
-    created() {
+    mounted() {
         this.socket = io('https://escape-game-cz.herokuapp.com', { transports: ['websocket'] })
 
         const cursor = document.querySelector('.cursor'),
             this_ = this
 
+        /* Cursor */
         document.addEventListener('mousemove', e => {
             cursor.setAttribute("style", "top:" + (e.pageY - 10) + "px; left:" + (e.pageX - 10) + "px")
         })
 
+        /* Socket.io */
         this_.socket.on('connected', id => {
             console.log(id)
         })
