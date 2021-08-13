@@ -2,7 +2,6 @@
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
-const path = require('path')
 
 // Socket.io
 const io = require("socket.io")(server);
@@ -50,12 +49,10 @@ const client = redis.createClient(process.env.REDIS_URL);
 
 app.get('/game/:id', (req, res, next) => {
     const client_key = req.params.id,
-        tpath = req.params[0] ? req.params[0] : 'index.html'
+        path = req.params[0] ? req.params[0] : 'index.html'
 
-    req.url = path.basename(req.originalUrl);
-    express.static(__dirname + '/public')(req, res, next);
-
-    // res.sendFile(path, { root: './public' })
+    res.sendFile(path, { root: './public' })
+    // Now sending only one static file, I want to send static folder with dynamic route ...
 })
 
 
@@ -67,6 +64,7 @@ app.get('/game/:id', (req, res, next) => {
 
 server.listen(process.env.PORT || 3000, (req, res) => {
     console.log('Server is listening ...')
-    // app.use(express.static(__dirname + '/public'));
+    // Sending default folder
+    app.use(express.static(__dirname + '/default'));
 });
 
