@@ -66,6 +66,6 @@ const client = redis.createClient(process.env.REDIS_URL);
 
 server.listen(process.env.PORT || 3000, (req, res) => {
     console.log('Server is listening ...')
-    app.use(express.static(__dirname + '/client'));
+    app.use(express.static(__dirname + '/public'));
 });
 
