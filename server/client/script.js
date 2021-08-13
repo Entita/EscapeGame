@@ -17,11 +17,11 @@ var app = new Vue({
             inventory: [
                 {
                     name: 'Key',
-                    src: 'img/key.png'
+                    src: '/img/key.png'
                 },
                 {
                     name: 'Note',
-                    src: 'img/notepad.png'
+                    src: '/img/notepad.png'
                 }
             ],
             visibility: {
