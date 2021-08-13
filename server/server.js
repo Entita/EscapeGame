@@ -46,16 +46,20 @@ const client = redis.createClient(process.env.REDIS_URL);
 
 
 
+server.configure(function(){
+    server.use('/client', express.static(__dirname + '/client'));
+    server.use(express.static(__dirname + '/client'));
+  });
 
-app.get('/game/:id', function (req, res) {
-    const client_key = req.params.id
-    if (client_key === 'test') {
-        console.log('Sending html files', __dirname)
-        app.use(express.static("client"));
-    } else {
-        res.send('Wrong game id')
-    }
-})
+// app.get('/game/:id', function (req, res) {
+//     const client_key = req.params.id
+//     if (client_key === 'test') {
+//         console.log('Sending html files', __dirname)
+//         app.use(express.static("client"));
+//     } else {
+//         res.send('Wrong game id')
+//     }
+// })
 
 
 // Socket.io calls
