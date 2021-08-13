@@ -9,7 +9,7 @@ const io = require("socket.io")(server);
 
 app.get('/game/:id', function (req, res) {
     const client_key = req.params.id
-    res.send('Great you logged in!', client_key)
+    res.send('Great you logged in!' + client_key)
 })
 
 io.on('connection', socket => {
