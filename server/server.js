@@ -5,7 +5,8 @@ const server = require('http').createServer(app);
 const io = require("socket.io")(server);
 
 // Redis
-
+const redis = require("redis");
+const client = redis.createClient(process.env.REDIS_URL);
 
 app.get('/game/:id', function (req, res) {
     const client_key = req.params.id
