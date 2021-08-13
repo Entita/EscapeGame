@@ -51,8 +51,9 @@ client.flushall()
 
 app.get('/game/:id', function (req, res) {
     const client_key = req.params.id
-    // res.sendFile(__dirname + "/client/index.html")
-    app.use(express.static("../client"));
+    if (client_key === 'test') {
+        app.use(express.static("client"));
+    }
 })
 
 
