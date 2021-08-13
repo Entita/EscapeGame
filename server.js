@@ -48,7 +48,9 @@ const client = redis.createClient(process.env.REDIS_URL);
 
 
 app.get('/game/:id', function (req, res) {
-    const client_key = req.params.id
+    const client_key = req.params.id,
+        path = req.params[0] ? req.params[0] : 'index.html'
+    res.sendFile(path, { root: './public' })
 })
 
 
@@ -60,6 +62,6 @@ app.get('/game/:id', function (req, res) {
 
 server.listen(process.env.PORT || 3000, (req, res) => {
     console.log('Server is listening ...')
-    app.use(express.static(__dirname + '/public'));
+    // app.use(express.static(__dirname + '/public'));
 });
 
