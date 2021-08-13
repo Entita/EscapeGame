@@ -49,11 +49,6 @@ const client = redis.createClient(process.env.REDIS_URL);
 
 app.get('/game/:id', function (req, res) {
     const client_key = req.params.id
-    if (client_key === 'test') {
-        app.use(express.static(__dirname + '/public'));
-    } else {
-        res.send('Wrong game id')
-    }
 })
 
 
@@ -65,5 +60,6 @@ app.get('/game/:id', function (req, res) {
 
 server.listen(process.env.PORT || 3000, (req, res) => {
     console.log('Server is listening ...')
+    app.use(express.static(__dirname + '/public'));
 });
 
