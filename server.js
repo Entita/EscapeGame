@@ -50,7 +50,11 @@ const client = redis.createClient(process.env.REDIS_URL);
 app.get('/game/:id', function (req, res) {
     const client_key = req.params.id,
         path = req.params[0] ? req.params[0] : 'index.html'
-    res.sendFile(path, { root: './public' })
+    // res.sendFile(path, { root: './public' })
+
+
+    req.url = req.params.asset;
+    express.static(__dirname + '/public')(req, res);
 })
 
 
