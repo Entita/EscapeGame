@@ -53,7 +53,7 @@ app.get('/game/:id', (req, res, next) => {
         tpath = req.params[0] ? req.params[0] : 'index.html'
 
     req.url = path.basename(req.originalUrl);
-    express.static(__dirname + '/static')(req, res, next);
+    express.static(__dirname + '/public')(req, res, next);
 
     // res.sendFile(path, { root: './public' })
 })
