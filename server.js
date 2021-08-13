@@ -50,8 +50,8 @@ const client = redis.createClient(process.env.REDIS_URL);
 app.get('/game/:id', function (req, res) {
     const client_key = req.params.id
     if (client_key === 'test') {
-        console.log('Sending html files')
-        app.use(express.static(path.join(__dirname, 'client')))
+        console.log('Sending html files', __dirname)
+        app.use(express.static("client"));
     } else {
         res.send('Wrong game id')
     }
