@@ -10,9 +10,9 @@ const io = require("socket.io")(server);
 const redis = require("redis");
 const client = redis.createClient(process.env.REDIS_URL);
 
-client.on('connect', function () {
-    console.log('Connected!'); // Connected!
-});
+// client.on('connect', function () {
+//     console.log('Connected!'); // Connected!
+// });
 
 // Strings
 // client.set('framework', 'ReactJS', function (err, reply) {
@@ -38,7 +38,6 @@ client.on('connect', function () {
 //     console.log(reply); // 1
 // });
 
-client.flushall()
 
 
 
