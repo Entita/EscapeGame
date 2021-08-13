@@ -52,15 +52,15 @@ client.flushall()
 app.get('/game/:id', function (req, res) {
     const client_key = req.params.id
     // res.sendFile(__dirname + "/client/index.html")
-    app.use(express.static("client"));
+    app.use(express.static("../client"));
 })
 
 
 // Socket.io calls
-io.on('connection', socket => {
-    console.log('player connected', socket.id)
-    io.emit('connected', socket.id)
-})
+// io.on('connection', socket => {
+//     console.log('player connected', socket.id)
+//     io.emit('connected', socket.id)
+// })
 
 server.listen(process.env.PORT || 3000, (req, res) => {
     console.log('Server is listening ...')
