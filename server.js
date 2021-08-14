@@ -52,6 +52,7 @@ app.get('/game/:id', (req, res, next) => {
     const client_key = req.params.id
         // path = req.params[0] ? req.params[0] : 'index.html'
 
+        
     if (client_key === 'test') {
         // res.sendFile(path, { root: './public' })
         res.sendFile(path.join(__dirname, '/public'))
