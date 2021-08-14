@@ -65,9 +65,7 @@ app.get('*', (req, res) => {
     if (get_path.startsWith('/public/')) {
         const get_last_path = get_path.split('/public/')[1]
         try {
-            if (fs.existsSync(get_path)) {
-                res.sendFile(get_last_path, { root: './public' })
-            }
+            res.sendFile(get_last_path, { root: './public' })
         } catch (err) {
             res.send('Path doesn\'t exist')
         }
