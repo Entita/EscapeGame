@@ -4,38 +4,39 @@ const app = express();
 const server = require('http').createServer(app);
 
 // Socket.io
-const io = require("socket.io")(server);
+// const io = require("socket.io")(server);
 
 // Redis
-const redis = require("redis");
-const client = redis.createClient(process.env.REDIS_URL);
+// const redis = require("redis");
+// const client = redis.createClient(process.env.REDIS_URL);
 
 // client.on('connect', function () {
 //     console.log('Connected!'); // Connected!
-// });
 
-// Strings
-// client.set('framework', 'ReactJS', function (err, reply) {
-//     console.log(reply); // OK
-// });
+//     // Strings
+//     client.set('framework', 'ReactJS', function (err, reply) {
+//         console.log(reply); // OK
+//     });
 
-// client.get('framework', function (err, reply) {
-//     console.log(reply); // ReactJS
-// });
+//     client.get('framework', function (err, reply) {
+//         console.log(reply); // ReactJS
+//     });
 
 
-// // Check the existence of a key
-// client.exists('framework', function (err, reply) {
-//     if (reply === 1) {
-//         console.log('Exists!');
-//     } else {
-//         console.log('Doesn\'t exist!');
-//     }
-// });
+//     // Check the existence of a key
+//     client.exists('framework', function (err, reply) {
+//         if (reply === 1) {
+//             console.log('Exists!');
+//         } else {
+//             console.log('Doesn\'t exist!');
+//         }
+//     });
 
-// // Delete a key
-// client.del('frameworks_list', function (err, reply) {
-//     console.log(reply); // 1
+//     // Delete a key
+//     client.del('frameworks_list', function (err, reply) {
+//         console.log(reply); // 1
+//     });
+
 // });
 
 
@@ -58,15 +59,19 @@ app.get('/game/:id', (req, res) => {
 })
 
 app.get('*', (req, res) => {
+    // Get all paths
     const get_path = req.params[0]
 
     if (get_path.startsWith('/public/')) {
+        // Availability to get any files from /public folder on call
         const get_last_path = get_path.split('/public/')[1]
         res.sendFile(get_last_path, { root: './public' })
     } else if (get_path.startsWith('/default/')) {
+        // Availability to get any files from /default folder on call
         const get_last_path = get_path.split('/default/')[1]
         res.sendFile(get_last_path, { root: './default' })
     } else {
+        // If not calling public or default folder, then respond with default file
         res.sendFile('index.html', { root: './default' })
     }
 })
