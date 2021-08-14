@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
+const path = require('path')
 
 // Socket.io
 const io = require("socket.io")(server);
@@ -51,18 +52,14 @@ app.get('/game/:id', (req, res, next) => {
     const client_key = req.params.id,
         path = req.params[0] ? req.params[0] : 'index.html'
 
-    // if (client_key === 'game') {
-    //     res.sendFile(path, { root: './public' })
-    // } else {
-    //     res.send('Wrong game id')
-    // }
+    if (client_key === 'game') {
+        // res.sendFile(path, { root: './public' })
+        res.sendFile(path.join(__dirname, '/public'))
+    } else {
+        res.send('Wrong game id')
+    }
     // Now sending only one static file, I want to send static folder with dynamic route ...
 })
-
-
-// app.use(express.static(__dirname + '/default'));
-
-app.use('/game', express.static(__dirname + '/default'));
 
 // Socket.io calls
 // io.on('connection', socket => {
