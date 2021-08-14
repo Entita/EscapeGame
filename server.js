@@ -63,6 +63,9 @@ app.get('*', (req, res) => {
     if (get_path.startsWith('/public/')) {
         const get_last_path = get_path.split('/public/')[1]
         res.sendFile(get_last_path, { root: './public' })
+    } else {
+        console.log('default')
+        app.use(express.static('default'))
     }
 })
 
@@ -74,6 +77,5 @@ app.get('*', (req, res) => {
 
 server.listen(process.env.PORT || 3000, (req, res) => {
     console.log('Server is listening ...')
-    app.use(express.static('default'))
 });
 
