@@ -66,8 +66,6 @@ app.get('*', (req, res) => {
         fs.stat(get_last_path, (err, stat) => {
             if (stat && stat.isFile()) {
                 res.sendFile(get_last_path, { root: './public' })
-            } else {
-                res.send('Path doesn\'t exist', err)
             }
         })
     }
