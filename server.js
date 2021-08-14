@@ -62,7 +62,7 @@ app.get('/game/:id', (req, res, next) => {
 
 // app.use(express.static(__dirname + '/default'));
 
-app.use('/', express.static(__dirname + '/default'));
+app.use('/game', express.static(__dirname + '/default'));
 
 // Socket.io calls
 // io.on('connection', socket => {
