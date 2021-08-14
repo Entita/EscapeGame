@@ -65,7 +65,7 @@ app.get('*', (req, res) => {
         res.sendFile(get_last_path, { root: './public' })
     } else {
         console.log('default')
-        app.use(express.static(__dirname + 'default'))
+        app.use('index.html', express.static(__dirname + 'default'))
     }
 })
 
