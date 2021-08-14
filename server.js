@@ -64,19 +64,19 @@ app.get('*', (req, res) => {
     console.log(get_path, get_path.startsWith('/public/'))
     if (get_path.startsWith('/public/')) {
         const get_last_path = get_path.split('/public/')[1]
-        console.log(get_path, get_last_path)
+        res.sendFile(get_last_path, { root: './public' })
     }
 })
 
-app.get('/style.css', function (req, res) {
-    const client_path = req.params[0] ? req.params[0] : 'style.css'
-    res.sendFile(client_path, { root: './public' })
-});
+// app.get('/style.css', function (req, res) {
+//     const client_path = req.params[0] ? req.params[0] : 'style.css'
+//     res.sendFile(client_path, { root: './public' })
+// });
 
-app.get('/script.js', function (req, res) {
-    const client_path = req.params[0] ? req.params[0] : 'script.js'
-    res.sendFile(client_path, { root: './public' })
-});
+// app.get('/script.js', function (req, res) {
+//     const client_path = req.params[0] ? req.params[0] : 'script.js'
+//     res.sendFile(client_path, { root: './public' })
+// });
 
 // Socket.io calls
 // io.on('connection', socket => {
