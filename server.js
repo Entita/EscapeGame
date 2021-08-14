@@ -2,7 +2,6 @@
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
-const fs = require('fs')
 
 // Socket.io
 const io = require("socket.io")(server);
@@ -49,11 +48,10 @@ const client = redis.createClient(process.env.REDIS_URL);
 
 
 app.get('/game/:id', (req, res, next) => {
-    const client_key = req.params.id,
-        client_path = req.params[0] ? req.params[0] : 'index.html'
+    const client_key = req.params.id
 
     if (client_key === 'test') {
-        res.sendFile(client_path, { root: './public' })
+        res.sendFile('index.html', { root: './public' })
     } else {
         res.send('Wrong game id')
     }
@@ -61,13 +59,10 @@ app.get('/game/:id', (req, res, next) => {
 
 app.get('*', (req, res) => {
     const get_path = req.params[0]
+
     if (get_path.startsWith('/public/')) {
         const get_last_path = get_path.split('/public/')[1]
-        fs.stat(get_last_path, (err, stat) => {
-            if (stat && stat.isFile()) {
-                res.sendFile(get_last_path, { root: './public' })
-            }
-        })
+        res.sendFile(get_last_path, { root: './public' })
     }
 })
 
