@@ -2,7 +2,6 @@
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
-const path = require('path')
 
 // Socket.io
 const io = require("socket.io")(server);
@@ -53,7 +52,7 @@ app.get('/game/:id', (req, res, next) => {
         client_path = req.params[0] ? req.params[0] : 'index.html'
 
     if (client_key === 'test') {
-        res.sendFile(client_path, { root: path.join('./public') })
+        res.sendFile(client_path, { root: './public' })
     } else {
         res.send('Wrong game id')
     }
@@ -61,11 +60,13 @@ app.get('/game/:id', (req, res, next) => {
 })
 
 app.get('/style.css', function (req, res) {
-    res.sendFile(__dirname + "/" + "style.css");
+    const client_path = req.params[0] ? req.params[0] : 'style.css'
+    res.sendFile(client_path, { root: './public' })
 });
 
 app.get('/script.js', function (req, res) {
-    res.sendFile(__dirname + "/" + "script.js");
+    const client_path = req.params[0] ? req.params[0] : 'script.js'
+    res.sendFile(client_path, { root: './public' })
 });
 
 // Socket.io calls
