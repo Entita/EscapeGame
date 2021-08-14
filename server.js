@@ -66,17 +66,6 @@ app.get('*', (req, res) => {
     }
 })
 
-
-// app.get('/style.css', function (req, res) {
-//     const client_path = req.params[0] ? req.params[0] : 'style.css'
-//     res.sendFile(client_path, { root: './public' })
-// });
-
-// app.get('/script.js', function (req, res) {
-//     const client_path = req.params[0] ? req.params[0] : 'script.js'
-//     res.sendFile(client_path, { root: './public' })
-// });
-
 // Socket.io calls
 // io.on('connection', socket => {
 //     console.log('player connected', socket.id)
@@ -85,5 +74,6 @@ app.get('*', (req, res) => {
 
 server.listen(process.env.PORT || 3000, (req, res) => {
     console.log('Server is listening ...')
+    app.use(express.static('default'))
 });
 
