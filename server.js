@@ -66,6 +66,7 @@ app.get('*', (req, res) => {
     }
 })
 
+
 // app.get('/style.css', function (req, res) {
 //     const client_path = req.params[0] ? req.params[0] : 'style.css'
 //     res.sendFile(client_path, { root: './public' })
