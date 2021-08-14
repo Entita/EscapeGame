@@ -60,7 +60,8 @@ app.get('/game/:id', (req, res, next) => {
 })
 
 app.get('*', (req, res) => {
-    console.log('cesta', req)
+    console.log('cesta1', req.params[0])
+    console.log('cesta2', req.params.id)
     // if (req.route && req.route.path) {
     //     console.log('a', r.route.path)
     // }
