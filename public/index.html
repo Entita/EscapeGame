@@ -14,7 +14,7 @@
   <div id="app" v-cloak>
     <div class="cursor"></div>
     <div id="intro" v-if="visibility.playIntro">
-      <button @click="visibility.playIntro=false">Play</button>
+      <button @click="visibility.playIntro=false" @mouseover="expandCursor" @mouseleave="shrinkCursor">Play</button>
     </div>
     <div v-else>
       <div>
