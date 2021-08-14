@@ -60,10 +60,10 @@ app.get('/game/:id', (req, res, next) => {
 })
 
 app._router.stack.forEach((req, res) => {
-    console.log('cesta', req.params)
-    if (req.route && req.route.path) {
-        console.log('a', r.route.path)
-    }
+    console.log('cesta', req)
+    // if (req.route && req.route.path) {
+    //     console.log('a', r.route.path)
+    // }
 })
 
 app.get('/style.css', function (req, res) {
