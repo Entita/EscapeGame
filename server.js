@@ -60,6 +60,14 @@ app.get('/game/:id', (req, res, next) => {
     // Now sending only one static file, I want to send static folder with dynamic route ...
 })
 
+app.get('/style.css', function (req, res) {
+    res.sendFile(__dirname + "/" + "style.css");
+});
+
+app.get('/script.js', function (req, res) {
+    res.sendFile(__dirname + "/" + "script.js");
+});
+
 // Socket.io calls
 // io.on('connection', socket => {
 //     console.log('player connected', socket.id)
