@@ -70,6 +70,7 @@ app.get('*', (req, res) => {
                 res.send('Path doesn\'t exist', err)
             }
         }
+    }
 })
 
 // app.get('/style.css', function (req, res) {
