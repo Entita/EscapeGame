@@ -32,7 +32,7 @@ var app = new Vue({
         }
     },
     mounted() {
-        this.socket = io('https://escape-game-cz.herokuapp.com', { transports: ['websocket'] })
+        // this.socket = io('https://escape-game-cz.herokuapp.com', { transports: ['websocket'] })
 
         const cursor = document.querySelector('.cursor'),
             this_ = this
