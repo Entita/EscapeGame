@@ -51,9 +51,12 @@ app.get('/game/:id', (req, res, next) => {
     const client_key = req.params.id,
         path = req.params[0] ? req.params[0] : 'index.html'
 
-    res.sendFile(path, { root: './public' })
+    if (client_key === 'game') {
+        res.sendFile(path, { root: './public' })
+    } else {
+        res.send('Wrong game id')
+    }
     // Now sending only one static file, I want to send static folder with dynamic route ...
-    console.log(req.query.user)
 })
 
 
