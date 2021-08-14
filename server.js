@@ -63,13 +63,13 @@ app.get('*', (req, res) => {
     const get_path = req.params[0]
     if (get_path.startsWith('/public/')) {
         const get_last_path = get_path.split('/public/')[1]
-        fs.stat(get_last_path, function (err, stat) {
+        fs.stat(get_last_path, (err, stat) => {
             if (stat && stat.isFile()) {
                 res.sendFile(get_last_path, { root: './public' })
             } else {
                 res.send('Path doesn\'t exist', err)
             }
-        }
+        })
     }
 })
 
