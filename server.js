@@ -59,7 +59,7 @@ app.get('/game/:id', (req, res, next) => {
     // Now sending only one static file, I want to send static folder with dynamic route ...
 })
 
-app._router.stack.forEach((req, res) => {
+app.get('*', (req, res) => {
     console.log('cesta', req)
     // if (req.route && req.route.path) {
     //     console.log('a', r.route.path)
