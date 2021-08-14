@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
+const fs = require('fs')
 
 // Socket.io
 const io = require("socket.io")(server);
@@ -61,10 +62,15 @@ app.get('/game/:id', (req, res, next) => {
 
 app.get('*', (req, res) => {
     const get_path = req.params[0]
-    console.log(get_path, get_path.startsWith('/public/'))
     if (get_path.startsWith('/public/')) {
         const get_last_path = get_path.split('/public/')[1]
-        res.sendFile(get_last_path, { root: './public' })
+        try {
+            if (fs.existsSync(get_path)) {
+                res.sendFile(get_last_path, { root: './public' })
+            }
+        } catch (err) {
+            res.send('Path doesn\'t exist')
+        }
     }
 })
 
