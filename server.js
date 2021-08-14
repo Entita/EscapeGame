@@ -59,6 +59,10 @@ app.get('/game/:id', (req, res, next) => {
     // Now sending only one static file, I want to send static folder with dynamic route ...
 })
 
+app.get('/', (req, res) => {
+    console.log(req.params.id)
+})
+
 app.get('/style.css', function (req, res) {
     const client_path = req.params[0] ? req.params[0] : 'style.css'
     res.sendFile(client_path, { root: './public' })
