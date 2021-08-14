@@ -47,7 +47,7 @@ const client = redis.createClient(process.env.REDIS_URL);
 
 
 
-app.get('/game/:id', (req, res, next) => {
+app.get('/game/:id', (req, res) => {
     const client_key = req.params.id
 
     if (client_key === 'test') {
@@ -63,9 +63,11 @@ app.get('*', (req, res) => {
     if (get_path.startsWith('/public/')) {
         const get_last_path = get_path.split('/public/')[1]
         res.sendFile(get_last_path, { root: './public' })
+    } else if (get_path.startsWith('/default/')) {
+        const get_last_path = get_path.split('/default/')[1]
+        res.sendFile(get_last_path, { root: './default' })
     } else {
-        console.log('default')
-        app.use('index.html', express.static(__dirname + 'default'))
+        res.sendFile('index.html', { root: './default' })
     }
 })
 
