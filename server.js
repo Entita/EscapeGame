@@ -60,11 +60,11 @@ app.get('/game/:id', (req, res, next) => {
 })
 
 app.get('*', (req, res) => {
-    console.log('cesta1', req.params[0])
-    console.log('cesta2', req.params.id)
-    // if (req.route && req.route.path) {
-    //     console.log('a', r.route.path)
-    // }
+    const get_path = req.params[0]
+    if (get_path.startsWith('public/')) {
+        const get_last_path = get_path.pop('public/')[1]
+        console.log(get_path, get_last_path)
+    }
 })
 
 app.get('/style.css', function (req, res) {
