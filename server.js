@@ -53,6 +53,7 @@ app.get('/game/:id', (req, res, next) => {
 
     res.sendFile(path, { root: './public' })
     // Now sending only one static file, I want to send static folder with dynamic route ...
+    console.log(req.query.user)
 })
 
 
