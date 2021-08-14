@@ -51,14 +51,18 @@ app.get('/game/:id', (req, res, next) => {
     const client_key = req.params.id,
         path = req.params[0] ? req.params[0] : 'index.html'
 
-    if (client_key === 'game') {
-        res.sendFile(path, { root: './public' })
-    } else {
-        res.send('Wrong game id')
-    }
+    // if (client_key === 'game') {
+    //     res.sendFile(path, { root: './public' })
+    // } else {
+    //     res.send('Wrong game id')
+    // }
     // Now sending only one static file, I want to send static folder with dynamic route ...
 })
 
+
+// app.use(express.static(__dirname + '/default'));
+
+app.use('/', express.static(__dirname + '/default'));
 
 // Socket.io calls
 // io.on('connection', socket => {
@@ -68,7 +72,5 @@ app.get('/game/:id', (req, res, next) => {
 
 server.listen(process.env.PORT || 3000, (req, res) => {
     console.log('Server is listening ...')
-    // Sending default folder
-    app.use(express.static(__dirname + '/default'));
 });
 
