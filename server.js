@@ -63,7 +63,7 @@ app.get('*', (req, res) => {
     const get_path = req.params[0]
     console.log(get_path, get_path.startsWith('/public/'))
     if (get_path.startsWith('/public/')) {
-        const get_last_path = get_path.pop('/public/')[1]
+        const get_last_path = get_path.split('/public/')[1]
         console.log(get_path, get_last_path)
     }
 })
