@@ -47,9 +47,9 @@ var app = new Vue({
         })
 
         /* Socket.io */
-        this_.socket.on('connected', id => {
-            console.log(id)
-        })
+        // this_.socket.on('connected', id => {
+        //     console.log(id)
+        // })
     },
     methods: {
         sendMessage(text, type) {
