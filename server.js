@@ -27,7 +27,7 @@ client.on('connect', function () {
 
 });
 
-function key_exists(key) {
+async function key_exists(key) {
     // client.exists(key, function (err, reply) {
     //     console.log('response', reply)
     //     if (reply === 1) {
@@ -46,7 +46,7 @@ function key_exists(key) {
 
 app.get('/game/:id', (req, res) => {
     const client_key = req.params.id,
-        bla = key_exists(client_key)
+        bla = await key_exists(client_key)
     console.log('bla', bla)
     if (bla) {
         res.sendFile('index.html', { root: './public' })
