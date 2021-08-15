@@ -15,9 +15,9 @@ client.on('connect', function () {
     //     console.log(reply);
     // });
 
-    // client.lrange('keys', 0, -1, function (err, reply) {
-    //     console.log(reply);
-    // });
+    client.lrange('keys', 0, -1, function (err, reply) {
+        console.log(reply);
+    });
 
     // Delete a key
     // client.del('frameworks_list', function (err, reply) {
