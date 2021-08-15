@@ -11,17 +11,17 @@ client.on('connect', function () {
     console.log('Connected!'); // Connected!
 
     // Strings
-    client.rpush(['keys', 'test_key'], function (err, reply) {
+    client.rpush(['keys', 'test_key2'], function (err, reply) {
         console.log(reply);
     });
 
-    // client.get('keys', function (err, reply) {
-    //     console.log(reply);
-    // });
+    client.get('keys', function (err, reply) {
+        console.log(reply);
+    });
 
-    // client.lrange('keys', 0, -1, function (err, reply) {
-    //     console.log(reply);
-    // });
+    client.lrange('keys', 0, -1, function (err, reply) {
+        console.log(reply);
+    });
 
 
     // Check the existence of a key
