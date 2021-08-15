@@ -4,46 +4,41 @@ const app = express();
 const server = require('http').createServer(app);
 
 // Redis
-// const redis = require("redis");
-// const client = redis.createClient(process.env.REDIS_URL);
+const redis = require("redis");
+const client = redis.createClient(process.env.REDIS_URL);
 
-// client.on('connect', function () {
-//     console.log('Connected!'); // Connected!
+client.on('connect', function () {
+    console.log('Connected!'); // Connected!
 
-//     // Strings
-//     client.set('framework', 'ReactJS', function (err, reply) {
-//         console.log(reply); // OK
-//     });
+    // Strings
+    client.rpush(['keys', 'test_key'], function (err, reply) {
+        console.log(reply);
+    });
 
-//     client.get('framework', function (err, reply) {
-//         console.log(reply); // ReactJS
-//     });
+    // client.get('keys', function (err, reply) {
+    //     console.log(reply);
+    // });
 
-
-//     // Check the existence of a key
-//     client.exists('framework', function (err, reply) {
-//         if (reply === 1) {
-//             console.log('Exists!');
-//         } else {
-//             console.log('Doesn\'t exist!');
-//         }
-//     });
-
-//     // Delete a key
-//     client.del('frameworks_list', function (err, reply) {
-//         console.log(reply); // 1
-//     });
-
-// });
+    // client.lrange('keys', 0, -1, function (err, reply) {
+    //     console.log(reply);
+    // });
 
 
+    // Check the existence of a key
+    // client.exists('framework', function (err, reply) {
+    //     if (reply === 1) {
+    //         console.log('Exists!');
+    //     } else {
+    //         console.log('Doesn\'t exist!');
+    //     }
+    // });
 
+    // Delete a key
+    // client.del('frameworks_list', function (err, reply) {
+    //     console.log(reply); // 1
+    // });
 
-
-
-
-
-
+});
 
 app.get('/game/:id', (req, res) => {
     const client_key = req.params.id
