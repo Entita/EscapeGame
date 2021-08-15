@@ -15,16 +15,14 @@ client.on('connect', function () {
     //     console.log(reply);
     // });
 
-    client.lrange('keys', 0, -1, function (err, reply) {
-        console.log(reply);
-    });
-
-
     // Delete a key
-    client.del('test_key2', function (err, reply) {
+    client.lrem('keys', 0, 'test_key', function (err, reply) {
         console.log('deleted', reply); // 1
     });
 
+    client.lrange('keys', 0, -1, function (err, reply) {
+        console.log(reply);
+    });
 });
 
 // client.exists(key, function (err, reply) {
@@ -38,9 +36,8 @@ client.on('connect', function () {
 
 app.get('/game/:id', (req, res) => {
     const client_key = req.params.id
-    client.exists(client_key, (err, reply) => {
-        console.log('response', reply)
-        if (reply === 1) {
+    client.lpos('keys', client_key, (err, reply) => {
+        if (reply != null) {
             res.sendFile('index.html', { root: './public' })
         } else {
             res.send('Key doesn\'t exists')
