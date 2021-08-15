@@ -36,6 +36,9 @@ var app = new Vue({
         shrinkCursor() {
             const cursor = document.querySelector('.cursor')
             cursor.classList.remove('expand')
+        },
+        redirectURL() {
+            location.href = '/public'
         }
     }
 })

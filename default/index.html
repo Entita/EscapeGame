@@ -15,9 +15,7 @@
     <div id="app" v-cloak>
         <div class="cursor"></div>
         <div id="intro">
-            <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="window.href='/public'">Play</button>
-            <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="window.location.href='/public/index.html'">Play</button>
-            <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="window.location.href='https://google.com'">Play</button>
+            <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="redirectURL">Play</button>
         </div>
     </div>
 
