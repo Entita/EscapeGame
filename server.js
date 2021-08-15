@@ -21,9 +21,9 @@ client.on('connect', function () {
 
 
     // Delete a key
-    // client.del('frameworks_list', function (err, reply) {
-    //     console.log(reply); // 1
-    // });
+    client.del('test_key2', function (err, reply) {
+        console.log('deleted', reply); // 1
+    });
 
 });
 
@@ -45,9 +45,10 @@ function key_exists(key) {
 }
 
 app.get('/game/:id', (req, res) => {
-    const client_key = req.params.id
-
-    if (key_exists(client_key)) {
+    const client_key = req.params.id,
+        bla = key_exists(client_key)
+    console.log('bla', bla)
+    if (bla) {
         res.sendFile('index.html', { root: './public' })
     } else {
         res.send('Key doesn\'t exists')
