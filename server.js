@@ -3,9 +3,6 @@ const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 
-// Socket.io
-// const io = require("socket.io")(server);
-
 // Redis
 // const redis = require("redis");
 // const client = redis.createClient(process.env.REDIS_URL);
@@ -76,13 +73,6 @@ app.get('*', (req, res) => {
     }
 })
 
-// Socket.io calls
-// io.on('connection', socket => {
-//     console.log('player connected', socket.id)
-//     io.emit('connected', socket.id)
-// })
-
 server.listen(process.env.PORT || 3000, (req, res) => {
     console.log('Server is listening ...')
 });
-

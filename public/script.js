@@ -31,10 +31,7 @@ var app = new Vue({
         }
     },
     mounted() {
-        // this.socket = io('https://escape-game-cz.herokuapp.com', { transports: ['websocket'] })
-
-        const cursor = document.querySelector('.cursor'),
-            this_ = this
+        const cursor = document.querySelector('.cursor')
 
         /* Cursor */
         document.addEventListener('mousemove', e => {
@@ -44,11 +41,6 @@ var app = new Vue({
         document.addEventListener('mouseleave', () => {
             cursor.setAttribute("style", "top: -25px")
         })
-
-        /* Socket.io */
-        // this_.socket.on('connected', id => {
-        //     console.log(id)
-        // })
     },
     methods: {
         sendMessage(text, type) {
