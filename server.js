@@ -27,32 +27,25 @@ client.on('connect', function () {
 
 });
 
-async function key_exists(key) {
-    // client.exists(key, function (err, reply) {
-    //     console.log('response', reply)
-    //     if (reply === 1) {
-    //         return true
-    //     }
-    //     return false
-    // });
+// client.exists(key, function (err, reply) {
+//     console.log('response', reply)
+//     if (reply === 1) {
+//         return true
+//     }
+//     return false
+// });
+
+
+app.get('/game/:id', (req, res) => {
+    const client_key = req.params.id
     client.lpos('keys', key, (err, reply) => {
         console.log('response', reply)
         if (reply != null) {
-            return true
+            res.sendFile('index.html', { root: './public' })
+        } else {
+            res.send('Key doesn\'t exists')
         }
-        return false
     })
-}
-
-app.get('/game/:id', (req, res) => {
-    const client_key = req.params.id,
-        bla = await key_exists(client_key)
-    console.log('bla', bla)
-    if (bla) {
-        res.sendFile('index.html', { root: './public' })
-    } else {
-        res.send('Key doesn\'t exists')
-    }
 })
 
 app.get('*', (req, res) => {
