@@ -10,20 +10,21 @@ const client = redis.createClient(process.env.REDIS_URL);
 client.on('connect', function () {
     console.log('Redis connected!'); // Connected!
 
-    client.rpush(['keys', 'test_key'], function (err, reply) {
-        console.log(reply);
-    });
+    // Add a key
+    // client.rpush(['keys', 'test_key'], function (err, reply) {
+    //     console.log(reply);
+    // });
 
     // Delete a key
-    client.lrem('keys', 0, 'test_key2', function (err, reply) {
-        console.log('deleted', reply); // 1
-    });
+    // client.lrem('keys', 0, 'test_key2', function (err, reply) {
+    //     console.log('deleted', reply); // 1
+    // });
 
+    // Show a list
     client.lrange('keys', 0, -1, function (err, reply) {
         console.log(reply);
     });
 });
-
 
 app.get('/game/:id', (req, res) => {
     const client_key = req.params.id
