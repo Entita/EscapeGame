@@ -1,0 +1,56 @@
+* {
+    margin     : 0;
+    padding    : 0;
+    box-sizing : border-box;
+    cursor     : none;
+    user-select: none;
+}
+
+:root {
+    --white               : #e6e6e6;
+    --darkest-blue-color  : #071e26;
+    --greyish-blue-color  : #06394c;
+    --bright-blue-color   : #0c4383;
+    --turquoise-blue-color: #22a0b6;
+    --palest-blue-color   : #6a96b9;
+    --dark-purpleish-color: #1b0440;
+}
+
+body {
+    background-color: var(--darkest-blue-color);
+    overflow        : hidden;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+#intro {
+    position     : absolute;
+    top          : 50%;
+    left         : 50%;
+    transform    : translate(-50%, -50%);
+    height       : 50vh;
+    width        : 30vw;
+    box-shadow   : 2px 2px 7px black;
+    border-radius: 12px;
+    padding      : .6rem 1.2rem;
+}
+
+#intro button {
+    background-color: var(--greyish-blue-color);
+    border          : none;
+    padding         : .8rem 1.6rem;
+    border-radius   : 4px;
+    opacity         : .8;
+    font-size       : 24px;
+    font-weight     : bold;
+    font-family     : cursive;
+    transition      : filter .4s ease;
+    display         : block;
+    margin          : 0 auto;
+}
+
+#intro button:hover {
+    filter: brightness(.8);
+}

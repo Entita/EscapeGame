@@ -12,7 +12,9 @@
 <body>
     <div id="app" v-cloak>
         <div class="cursor"></div>
-        <h1>Default</h1>
+        <div id="intro">
+            <button @mouseover="expandCursor" @mouseleave="shrinkCursor">Play</button>
+        </div>
     </div>
 
     <script type="text/javascript" src="/default/script.js"></script>

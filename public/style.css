@@ -43,42 +43,6 @@ body {
     /* background-color: rgba(255, 255, 255, .15); */
 }
 
-#intro {
-    position     : absolute;
-    top          : 50%;
-    left         : 50%;
-    transform    : translate(-50%, -50%);
-    height       : 50vh;
-    width        : 30vw;
-    box-shadow   : 2px 2px 7px black;
-    border-radius: 12px;
-    padding      : .6rem 1.2rem;
-}
-
-#intro button {
-    background-color: var(--greyish-blue-color);
-    border          : none;
-    padding         : .8rem 1.6rem;
-    border-radius   : 4px;
-    opacity         : .8;
-    font-size       : 24px;
-    font-weight     : bold;
-    font-family     : cursive;
-    transition      : filter .4s ease;
-    display         : block;
-    margin          : 0 auto;
-}
-
-#intro button:hover {
-    filter: brightness(.8);
-}
-
-#game-selector {
-    position: fixed;
-    height  : 100vh;
-    width   : 100vw;
-}
-
 .inventory-control {
     position  : fixed;
     bottom    : 0;
