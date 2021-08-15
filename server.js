@@ -19,6 +19,7 @@ client.on('connect', function () {
         console.log(reply);
     });
 
+
     // Delete a key
     // client.del('frameworks_list', function (err, reply) {
     //     console.log(reply); // 1
@@ -27,13 +28,20 @@ client.on('connect', function () {
 });
 
 function key_exists(key) {
-    client.exists(key, function (err, reply) {
+    // client.exists(key, function (err, reply) {
+    //     console.log('response', reply)
+    //     if (reply === 1) {
+    //         return true
+    //     }
+    //     return false
+    // });
+    client.lpos('keys', key, (err, reply) => {
         console.log('response', reply)
-        if (reply === 1) {
+        if (reply != null) {
             return true
         }
         return false
-    });
+    })
 }
 
 app.get('/game/:id', (req, res) => {
