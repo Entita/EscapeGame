@@ -13,117 +13,112 @@
 <body>
   <div id="app" v-cloak>
     <div class="cursor"></div>
-    <div id="intro" v-if="visibility.playIntro">
-      <button @click="visibility.playIntro=false" @mouseover="expandCursor" @mouseleave="shrinkCursor">Play</button>
-    </div>
-    <div v-else>
-      <div>
-        <div class="message-container"></div>
-        <div class="inventory-control" @click="openInventory($event)" @mouseover="expandCursor"
+    <div>
+      <div class="message-container"></div>
+      <div class="inventory-control" @click="openInventory($event)" @mouseover="expandCursor"
+        @mouseleave="shrinkCursor">
+      </div>
+      <div class="inventory">
+        <img v-for="item in inventory" v-bind:src="item.src" v-bind:alt="item.name" @mouseover="expandCursor"
           @mouseleave="shrinkCursor">
-        </div>
-        <div class="inventory">
-          <img v-for="item in inventory" v-bind:src="item.src" v-bind:alt="item.name" @mouseover="expandCursor"
-            @mouseleave="shrinkCursor">
-        </div>
+      </div>
 
-        <!-- Containers -->
-        <div v-if="visibility.openLockContainer" id="lockContainer" class="container"></div>
+      <!-- Containers -->
+      <div v-if="visibility.openLockContainer" id="lockContainer" class="container"></div>
 
-        <!-- SVG's -->
-        <svg id="first_room" viewBox="0 0 1280 580" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g id="Room1">
-            <g id="Door">
-              <circle v-if="visibility.openDoor" id="Open-knob" @mouseover="doorKnobToColor();expandCursor()"
-                @mouseleave="doorKnobToWhite();shrinkCursor()" @click="closeDoor($event)" cx="294.5" cy="288.5" r="9.5"
-                class="stroke-color" stroke-width="4" />
-              <path v-if="visibility.openDoor" id="Open-door" d="M320 496.331L173 544.851V35.1494L320 83.669V496.331Z"
+      <!-- SVG's -->
+      <svg id="first_room" viewBox="0 0 1280 580" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="Room1">
+          <g id="Door">
+            <circle v-if="visibility.openDoor" id="Open-knob" @mouseover="doorKnobToColor();expandCursor()"
+              @mouseleave="doorKnobToWhite();shrinkCursor()" @click="closeDoor($event)" cx="294.5" cy="288.5" r="9.5"
+              class="stroke-color" stroke-width="4" />
+            <path v-if="visibility.openDoor" id="Open-door" d="M320 496.331L173 544.851V35.1494L320 83.669V496.331Z"
+              class="stroke-color" stroke-width="6" />
+            <line id="Doorstep" y1="546" x2="659" y2="546" class="stroke-color" stroke-width="6" />
+            <path id="Frame" d="M139 3V546H173V34H372.5V546H403.5V3H139Z" class="stroke-color" stroke-width="6" />
+            <circle v-if="visibility.openDoor===false" id="Knob" @mouseover="doorKnobToColor();expandCursor()"
+              @mouseleave="doorKnobToWhite();shrinkCursor()" @click="openDoor($event)" cx="345" cy="289" r="13"
+              class="stroke-color" stroke-width="6" />
+          </g>
+          <g id="Table">
+            <path id="Table_2"
+              d="M1207 354V326H787V354H1207ZM1207 354H1069V546H1207V354ZM843 369.5H1069M1072 444H1204M1072 397H1204M807 354H843V546H807V354Z"
+              class="stroke-color" stroke-width="6" />
+            <path id="Drawer-Knob3" @mouseover="drawerKnobToColor($event);expandCursor()"
+              @mouseleave="drawerKnobToWhite($event);shrinkCursor()" @click="openDrawer($event)"
+              d="M1105 464C1105 460.134 1108.13 457 1112 457H1161C1164.87 457 1168 460.134 1168 464V467H1105V464Z"
+              class="fill-white-color" />
+            <path id="Drawer-Knob2" @mouseover="drawerKnobToColor($event);expandCursor()"
+              @mouseleave="drawerKnobToWhite($event);shrinkCursor()" @click="openDrawer($event)"
+              d="M1105 417C1105 413.134 1108.13 410 1112 410H1161C1164.87 410 1168 413.134 1168 417V420H1105V417Z"
+              class="fill-white-color" />
+            <path id="Drawer-Knob1" @mouseover="drawerKnobToColor($event);expandCursor()"
+              @mouseleave="drawerKnobToWhite($event);shrinkCursor()" @click="openDrawer($event)"
+              d="M1105 373C1105 369.134 1108.13 366 1112 366H1161C1164.87 366 1168 369.134 1168 373V376H1105V373Z"
+              class="fill-white-color" />
+            <g id="Open-Drawer3">
+              <path
+                d="M1097 474.5L1069.02 444.517C1069.01 444.51 1069.01 444.5 1069.02 444.5H1207L1236.27 472.11L1235 474.5H1099.5H1097Z"
+                class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
+              <path
+                d="M1098.5 576.5H1099V475H1097.5L1070.75 444.961C1070.14 444.275 1069 444.707 1069 445.626V547.622L1098.5 576.5Z"
+                class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
+              <path d="M1100.46 576.5L1099.04 474.5H1237V576.5H1100.46Z" class="fill-bg-color stroke-color"
                 class="stroke-color" stroke-width="6" />
-              <line id="Doorstep" y1="546" x2="659" y2="546" class="stroke-color" stroke-width="6" />
-              <path id="Frame" d="M139 3V546H173V34H372.5V546H403.5V3H139Z" class="stroke-color" stroke-width="6" />
-              <circle v-if="visibility.openDoor===false" id="Knob" @mouseover="doorKnobToColor();expandCursor()"
-                @mouseleave="doorKnobToWhite();shrinkCursor()" @click="openDoor($event)" cx="345" cy="289" r="13"
-                class="stroke-color" stroke-width="6" />
+              <path id="Drawer-Knob3"
+                d="M1136 493.5C1136 489.634 1139.13 486.5 1143 486.5H1192C1195.87 486.5 1199 489.634 1199 493.5V496.5H1136V493.5Z"
+                class="fill-white-color" @mouseover="drawerKnobToColor($event);expandCursor()"
+                @mouseleave="drawerKnobToWhite($event);shrinkCursor()" @click="closeDrawer($event)" />
             </g>
-            <g id="Table">
-              <path id="Table_2"
-                d="M1207 354V326H787V354H1207ZM1207 354H1069V546H1207V354ZM843 369.5H1069M1072 444H1204M1072 397H1204M807 354H843V546H807V354Z"
-                class="stroke-color" stroke-width="6" />
-              <path id="Drawer-Knob3" @mouseover="drawerKnobToColor($event);expandCursor()"
-                @mouseleave="drawerKnobToWhite($event);shrinkCursor()" @click="openDrawer($event)"
-                d="M1105 464C1105 460.134 1108.13 457 1112 457H1161C1164.87 457 1168 460.134 1168 464V467H1105V464Z"
-                class="fill-white-color" />
-              <path id="Drawer-Knob2" @mouseover="drawerKnobToColor($event);expandCursor()"
-                @mouseleave="drawerKnobToWhite($event);shrinkCursor()" @click="openDrawer($event)"
-                d="M1105 417C1105 413.134 1108.13 410 1112 410H1161C1164.87 410 1168 413.134 1168 417V420H1105V417Z"
-                class="fill-white-color" />
-              <path id="Drawer-Knob1" @mouseover="drawerKnobToColor($event);expandCursor()"
-                @mouseleave="drawerKnobToWhite($event);shrinkCursor()" @click="openDrawer($event)"
-                d="M1105 373C1105 369.134 1108.13 366 1112 366H1161C1164.87 366 1168 369.134 1168 373V376H1105V373Z"
-                class="fill-white-color" />
-              <g id="Open-Drawer3">
-                <path
-                  d="M1097 474.5L1069.02 444.517C1069.01 444.51 1069.01 444.5 1069.02 444.5H1207L1236.27 472.11L1235 474.5H1099.5H1097Z"
-                  class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
-                <path
-                  d="M1098.5 576.5H1099V475H1097.5L1070.75 444.961C1070.14 444.275 1069 444.707 1069 445.626V547.622L1098.5 576.5Z"
-                  class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
-                <path d="M1100.46 576.5L1099.04 474.5H1237V576.5H1100.46Z" class="fill-bg-color stroke-color"
-                  class="stroke-color" stroke-width="6" />
-                <path id="Drawer-Knob3"
-                  d="M1136 493.5C1136 489.634 1139.13 486.5 1143 486.5H1192C1195.87 486.5 1199 489.634 1199 493.5V496.5H1136V493.5Z"
-                  class="fill-white-color" @mouseover="drawerKnobToColor($event);expandCursor()"
-                  @mouseleave="drawerKnobToWhite($event);shrinkCursor()" @click="closeDrawer($event)" />
-              </g>
-              <g id="Open-Drawer2">
-                <path
-                  d="M1097 426.5L1069.02 396.517C1069.01 396.51 1069.01 396.5 1069.02 396.5H1207L1236.27 424.11L1235 426.5H1099.5H1097Z"
-                  class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
-                <path
-                  d="M1097.3 475H1099V427H1097.5L1070.75 396.961C1070.14 396.275 1069 396.707 1069 397.626V444.5L1097.3 475Z"
-                  class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
-                <path d="M1099 427H1237V474.51L1099 474.99V427Z" class="fill-bg-color stroke-color" class="stroke-color"
-                  stroke-width="6" />
-                <path id="Drawer-Knob2"
-                  d="M1136 445.5C1136 441.634 1139.13 438.5 1143 438.5H1192C1195.87 438.5 1199 441.634 1199 445.5V448.5H1136V445.5Z"
-                  class="fill-white-color" @mouseover="drawerKnobToColor($event);expandCursor()"
-                  @mouseleave="drawerKnobToWhite($event);shrinkCursor()" @click="closeDrawer($event)" />
-              </g>
-              <g id="Open-Drawer1">
-                <path d="M1097.36 384L1069 354H1207L1236.27 381.61L1235 384H1099.5H1097.36Z"
-                  class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
-                <path
-                  d="M1097.34 427H1099.34V384.5H1097.84L1071.07 355.852C1070.45 355.189 1069.34 355.628 1069.34 356.535V395.5L1097.34 427Z"
-                  class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
-                <rect x="1099" y="384" width="138" height="43" class="fill-bg-color stroke-color" class="stroke-color"
-                  stroke-width="6" />
-                <path id="Drawer-Knob1"
-                  d="M1136 403C1136 399.134 1139.13 396 1143 396H1192C1195.87 396 1199 399.134 1199 403V406H1136V403Z"
-                  class="fill-white-color" @mouseover="drawerKnobToColor($event);expandCursor()"
-                  @mouseleave="drawerKnobToWhite($event);shrinkCursor()" @click="closeDrawer($event)" />
-              </g>
+            <g id="Open-Drawer2">
+              <path
+                d="M1097 426.5L1069.02 396.517C1069.01 396.51 1069.01 396.5 1069.02 396.5H1207L1236.27 424.11L1235 426.5H1099.5H1097Z"
+                class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
+              <path
+                d="M1097.3 475H1099V427H1097.5L1070.75 396.961C1070.14 396.275 1069 396.707 1069 397.626V444.5L1097.3 475Z"
+                class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
+              <path d="M1099 427H1237V474.51L1099 474.99V427Z" class="fill-bg-color stroke-color" class="stroke-color"
+                stroke-width="6" />
+              <path id="Drawer-Knob2"
+                d="M1136 445.5C1136 441.634 1139.13 438.5 1143 438.5H1192C1195.87 438.5 1199 441.634 1199 445.5V448.5H1136V445.5Z"
+                class="fill-white-color" @mouseover="drawerKnobToColor($event);expandCursor()"
+                @mouseleave="drawerKnobToWhite($event);shrinkCursor()" @click="closeDrawer($event)" />
             </g>
-            <path id="Note" @mouseover="noteToColor($event);expandCursor()"
-              @mouseleave="noteToWhite($event);shrinkCursor()" @click="openNote($event)"
-              d="M642.985 239.104L623.761 238.284C623.761 268.657 622.115 275.224 618 287.537L659.858 290C665.619 278.507 667.383 262.09 664.914 240.336L647.924 239.104M642.985 239.104L644.22 235L648.747 235.821L647.924 239.104M642.985 239.104L641.868 243.209L646.395 244.44L647.924 239.104M631.169 254.291L652.157 255.933M629.934 262.5L634.461 262.91L638.988 263.321M644.338 263.731L651.334 264.142L659.152 264.552M626.642 271.94L641.045 273.172M645.572 273.582L653.391 274.403L658.329 274.813M625.407 280.149L641.045 281.381L657.918 282.612"
-              class="stroke-color" stroke-width="3" />
-            <g id="Mirror">
-              <path id="String" d="M562 123L614.5 69.5L669 123" class="stroke-color" stroke-opacity="0.5"
-                stroke-width="3" />
-              <circle id="Wall-nail" cx="614.5" cy="69.5" r="3.5" class="fill-white-color" />
-              <rect id="Outer-frame" @mouseover="mirrorToColor();expandCursor()"
-                @mouseleave="mirrorToWhite();shrinkCursor()" @click="rotateMirror" x="553" y="115" width="124"
-                height="178" class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
-              <rect id="Inner-frame" x="565" y="131" width="101" height="146" class="stroke-color" stroke-width="6" />
-              <circle id="Left-nail" cx="562" cy="123" r="3" class="fill-white-color" />
-              <circle id="Right-nail" cx="669" cy="123" r="3" class="fill-white-color" />
-              <path id="Reflection"
-                d="M602.091 160.03L585.091 178.03M649.091 232.03L632.091 250.03M623 161.5L584.88 199.62M647 185.38L584.88 247.5M647 211L608.88 249.12M641 165L582 224"
-                class="stroke-color" stroke-width="3" />
+            <g id="Open-Drawer1">
+              <path d="M1097.36 384L1069 354H1207L1236.27 381.61L1235 384H1099.5H1097.36Z"
+                class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
+              <path
+                d="M1097.34 427H1099.34V384.5H1097.84L1071.07 355.852C1070.45 355.189 1069.34 355.628 1069.34 356.535V395.5L1097.34 427Z"
+                class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
+              <rect x="1099" y="384" width="138" height="43" class="fill-bg-color stroke-color" class="stroke-color"
+                stroke-width="6" />
+              <path id="Drawer-Knob1"
+                d="M1136 403C1136 399.134 1139.13 396 1143 396H1192C1195.87 396 1199 399.134 1199 403V406H1136V403Z"
+                class="fill-white-color" @mouseover="drawerKnobToColor($event);expandCursor()"
+                @mouseleave="drawerKnobToWhite($event);shrinkCursor()" @click="closeDrawer($event)" />
             </g>
           </g>
-        </svg>
-      </div>
+          <path id="Note" @mouseover="noteToColor($event);expandCursor()"
+            @mouseleave="noteToWhite($event);shrinkCursor()" @click="openNote($event)"
+            d="M642.985 239.104L623.761 238.284C623.761 268.657 622.115 275.224 618 287.537L659.858 290C665.619 278.507 667.383 262.09 664.914 240.336L647.924 239.104M642.985 239.104L644.22 235L648.747 235.821L647.924 239.104M642.985 239.104L641.868 243.209L646.395 244.44L647.924 239.104M631.169 254.291L652.157 255.933M629.934 262.5L634.461 262.91L638.988 263.321M644.338 263.731L651.334 264.142L659.152 264.552M626.642 271.94L641.045 273.172M645.572 273.582L653.391 274.403L658.329 274.813M625.407 280.149L641.045 281.381L657.918 282.612"
+            class="stroke-color" stroke-width="3" />
+          <g id="Mirror">
+            <path id="String" d="M562 123L614.5 69.5L669 123" class="stroke-color" stroke-opacity="0.5"
+              stroke-width="3" />
+            <circle id="Wall-nail" cx="614.5" cy="69.5" r="3.5" class="fill-white-color" />
+            <rect id="Outer-frame" @mouseover="mirrorToColor();expandCursor()"
+              @mouseleave="mirrorToWhite();shrinkCursor()" @click="rotateMirror" x="553" y="115" width="124"
+              height="178" class="fill-bg-color stroke-color" class="stroke-color" stroke-width="6" />
+            <rect id="Inner-frame" x="565" y="131" width="101" height="146" class="stroke-color" stroke-width="6" />
+            <circle id="Left-nail" cx="562" cy="123" r="3" class="fill-white-color" />
+            <circle id="Right-nail" cx="669" cy="123" r="3" class="fill-white-color" />
+            <path id="Reflection"
+              d="M602.091 160.03L585.091 178.03M649.091 232.03L632.091 250.03M623 161.5L584.88 199.62M647 185.38L584.88 247.5M647 211L608.88 249.12M641 165L582 224"
+              class="stroke-color" stroke-width="3" />
+          </g>
+        </g>
+      </svg>
     </div>
   </div>
 

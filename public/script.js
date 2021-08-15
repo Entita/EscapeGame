@@ -25,7 +25,6 @@ var app = new Vue({
                 }
             ],
             visibility: {
-                playIntro: true,
                 openLockContainer: false,
                 openDoor: false
             }
