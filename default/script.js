@@ -26,5 +26,16 @@ var app = new Vue({
         document.addEventListener('mouseleave', () => {
             cursor.setAttribute("style", "top: -25px")
         })
+    },
+    methods: {
+        expandCursor() {
+            const cursor = document.querySelector('.cursor')
+            cursor.classList.add('expand')
+        },
+
+        shrinkCursor() {
+            const cursor = document.querySelector('.cursor')
+            cursor.classList.remove('expand')
+        }
     }
 })
