@@ -38,9 +38,9 @@ client.on('connect', function () {
 
 app.get('/game/:id', (req, res) => {
     const client_key = req.params.id
-    client.lpos('keys', client_key, (err, reply) => {
+    client.exists(client_key, (err, reply) => {
         console.log('response', reply)
-        if (reply != null) {
+        if (reply === 1) {
             res.sendFile('index.html', { root: './public' })
         } else {
             res.send('Key doesn\'t exists')
