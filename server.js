@@ -38,7 +38,7 @@ client.on('connect', function () {
 
 app.get('/game/:id', (req, res) => {
     const client_key = req.params.id
-    client.lpos('keys', key, (err, reply) => {
+    client.lpos('keys', client_key, (err, reply) => {
         console.log('response', reply)
         if (reply != null) {
             res.sendFile('index.html', { root: './public' })
