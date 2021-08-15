@@ -8,15 +8,14 @@ const redis = require("redis");
 const client = redis.createClient(process.env.REDIS_URL);
 
 client.on('connect', function () {
-    console.log('Connected!'); // Connected!
+    console.log('Redis connected!'); // Connected!
 
-    // Strings
-    // client.rpush(['keys', 'test_key2'], function (err, reply) {
-    //     console.log(reply);
-    // });
+    client.rpush(['keys', 'test_key'], function (err, reply) {
+        console.log(reply);
+    });
 
     // Delete a key
-    client.lrem('keys', 0, 'test_key', function (err, reply) {
+    client.lrem('keys', 0, 'test_key2', function (err, reply) {
         console.log('deleted', reply); // 1
     });
 
@@ -24,14 +23,6 @@ client.on('connect', function () {
         console.log(reply);
     });
 });
-
-// client.exists(key, function (err, reply) {
-//     console.log('response', reply)
-//     if (reply === 1) {
-//         return true
-//     }
-//     return false
-// });
 
 
 app.get('/game/:id', (req, res) => {
