@@ -38,11 +38,10 @@ function key_exists(key) {
 app.get('/game/:id', (req, res) => {
     const client_key = req.params.id
 
-    if (client_key === 'test') {
-        if (key_exists(client_key))
-            res.sendFile('index.html', { root: './public' })
+    if (key_exists(client_key)) {
+        res.sendFile('index.html', { root: './public' })
     } else {
-        res.send('Wrong game id')
+        res.send('Key doesn\'t exists')
     }
 })
 
