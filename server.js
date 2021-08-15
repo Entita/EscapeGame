@@ -28,6 +28,7 @@ client.on('connect', function () {
 
 function key_exists(key) {
     client.exists(key, function (err, reply) {
+        console.log('response', reply)
         if (reply === 1) {
             return true
         }
