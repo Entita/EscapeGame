@@ -11,26 +11,12 @@ client.on('connect', function () {
     console.log('Connected!'); // Connected!
 
     // Strings
-    client.rpush(['keys', 'test_key2'], function (err, reply) {
-        console.log(reply);
-    });
+    // client.rpush(['keys', 'test_key2'], function (err, reply) {
+    //     console.log(reply);
+    // });
 
-    client.get('keys', function (err, reply) {
-        console.log(reply);
-    });
-
-    client.lrange('keys', 0, -1, function (err, reply) {
-        console.log(reply);
-    });
-
-
-    // Check the existence of a key
-    // client.exists('framework', function (err, reply) {
-    //     if (reply === 1) {
-    //         console.log('Exists!');
-    //     } else {
-    //         console.log('Doesn\'t exist!');
-    //     }
+    // client.lrange('keys', 0, -1, function (err, reply) {
+    //     console.log(reply);
     // });
 
     // Delete a key
@@ -40,11 +26,21 @@ client.on('connect', function () {
 
 });
 
+function key_exists(key) {
+    client.exists(key, function (err, reply) {
+        if (reply === 1) {
+            return true
+        }
+        return false
+    });
+}
+
 app.get('/game/:id', (req, res) => {
     const client_key = req.params.id
 
     if (client_key === 'test') {
-        res.sendFile('index.html', { root: './public' })
+        if (key_exists(client_key))
+            res.sendFile('index.html', { root: './public' })
     } else {
         res.send('Wrong game id')
     }
