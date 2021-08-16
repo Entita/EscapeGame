@@ -7,6 +7,17 @@ const server = require('http').createServer(app);
 const redis = require("redis");
 const client = redis.createClient(process.env.REDIS_URL);
 
+function randomString(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            charactersLength));
+    }
+    return result;
+}
+
 client.on('connect', function () {
     console.log('Redis connected!'); // Connected!
 
@@ -24,19 +35,9 @@ client.on('connect', function () {
     // client.lrange('keys', 0, -1, function (err, reply) {
     //     console.log(reply);
     // });
-    function randomString(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() *
-                charactersLength));
-        }
-        return result;
-    }
 
     const random_string = randomString(8)
-    
+
     console.log(random_string)
     client.set('example@example.com', random_string, (err, reply) => {
         console.log(reply)
