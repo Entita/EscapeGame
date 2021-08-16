@@ -42,6 +42,7 @@ client.on('connect', function () {
 app.get('/game/:id', (req, res) => {
     const client_key = req.params.id
     client.exists(client_key, (err, reply) => {
+        console.log('reply', reply, client_key)
         if (reply === 1) {
             res.sendFile('index.html', { root: './public' })
         } else {
