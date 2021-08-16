@@ -22,28 +22,26 @@ function randomString(length) {
 client.on('connect', function () {
     console.log('Redis connected!'); // Connected!
 
-    const random_string = randomString(64),
-        expire_time = 60
+    // const random_string = randomString(64),
+    //     expire_time = 60
 
-    console.log(random_string)
-    client.set(random_string, 'example@example.com', (err, reply) => {
-        console.log(reply)
-    })
+    // console.log(random_string)
+    // client.set(random_string, 'example@example.com', (err, reply) => {
+    //     console.log(reply)
+    // })
 
-    client.expire(random_string, expire_time, (err, reply) => {
-        console.log(reply)
-    })
+    // client.expire(random_string, expire_time, (err, reply) => {
+    //     console.log(reply)
+    // })
 });
 
 app.get('/game/:id', (req, res) => {
     const client_key = req.params.id
-    client.ttl(client_key, (err, reply) => {
-        if (reply === -2) {
-            res.send('Key doesn\'t exists')
-        } else if (reply === -1) {
-            res.send('Key is expired')
-        } else {
+    client.exists(client_key, (err, reply) => {
+        if (reply === 1) {
             res.sendFile('index.html', { root: './public' })
+        } else {
+            res.send('Key doesn\'t exists')
         }
     })
 })
