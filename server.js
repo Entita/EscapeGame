@@ -26,9 +26,9 @@ client.on('connect', function () {
     //     expire_time = 60
 
     // console.log(random_string)
-    // client.set(random_string, 'example@example.com', (err, reply) => {
-    //     console.log(reply)
-    // })
+    client.set('test', 'example@example.com', (err, reply) => {
+        console.log(reply)
+    })
 
     // client.expire(random_string, expire_time, (err, reply) => {
     //     console.log(reply)
