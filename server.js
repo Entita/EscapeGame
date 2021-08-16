@@ -7,6 +7,7 @@ const server = require('http').createServer(app);
 const redis = require("redis");
 const client = redis.createClient(process.env.REDIS_URL);
 
+// Functions
 function randomString(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -21,21 +22,21 @@ function randomString(length) {
 client.on('connect', function () {
     console.log('Redis connected!'); // Connected!
 
-    const random_string = 'test',
-        expire_time = 10
+    // const random_string = randomString(64),
+    //     expire_time = 10
 
-    console.log(random_string)
-    client.set(random_string, 'example@example.com', (err, reply) => {
-        console.log(reply)
-    })
+    // console.log(random_string)
+    // client.set(random_string, 'example@example.com', (err, reply) => {
+    //     console.log(reply)
+    // })
 
     // client.expire(random_string, expire_time, (err, reply) => {
     //     console.log(reply)
     // })
 
-    // client.exists(random_string, (err, reply) => {
-    //     console.log(reply)
-    // })
+    client.exists('stPWbNLnJTdYCT0gaVY7JR3obXpVlUlc', (err, reply) => {
+        console.log(reply)
+    })
 });
 
 app.get('/game/:id', (req, res) => {
