@@ -45,8 +45,6 @@ client.on('connect', function () {
 app.use(bodyParser())
 
 app.post('/creating-checkout-session', async (req, res) => {
-    console.log('trying', req.body)
-    console.log(req.body.items)
     try {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
@@ -64,8 +62,8 @@ app.post('/creating-checkout-session', async (req, res) => {
                     quantity: item.quantity
                 }
             }),
-            success_url: '/succes.html',
-            cancel_url: '/cancel.html'
+            success_url: 'https://escape-game-cz.herokuapp.com/success.html',
+            cancel_url: 'https://escape-game-cz.herokuapp.com/cancel.html'
         })
         res.json({ url: session.url })
     } catch (e) {
