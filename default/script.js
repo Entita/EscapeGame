@@ -38,7 +38,7 @@ var app = new Vue({
             cursor.classList.remove('expand')
         },
         redirectURL() {
-            location.href = '/public/index.html'
+            location.href = '/buy'
         }
     }
 })
