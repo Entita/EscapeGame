@@ -26,45 +26,40 @@ function randomString(length) {
     return result
 }
 
-client.on('connect', function () {
-    console.log('Redis connected!') // Connected!
-
-    // const random_string = randomString(64),
-    //     expire_time = 60
-
-    // console.log(random_string)
-    // client.set(random_string, 'example@example.com', (err, reply) => {
-    //     console.log(reply)
-    // })
-
-    // client.expire(random_string, expire_time, (err, reply) => {
-    //     console.log(reply)
-    // })
-});
-
 app.use(bodyParser())
 
 app.post('/creating-checkout-session', async (req, res) => {
     try {
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            mode: 'payment',
-            line_items: req.body.items.map(item => {
-                const storeItem = storeItems.get(item.id)
-                return {
-                    price_data: {
-                        currency: 'czk',
-                        product_data: {
-                            name: storeItem.name
+        const random_string = randomString(64),
+            expire_time = 60,
+            session = await stripe.checkout.sessions.create({
+                payment_method_types: ['card'],
+                mode: 'payment',
+                line_items: req.body.items.map(item => {
+                    const storeItem = storeItems.get(item.id)
+                    return {
+                        price_data: {
+                            currency: 'czk',
+                            product_data: {
+                                name: storeItem.name
+                            },
+                            unit_amount: storeItem.priceInCents
                         },
-                        unit_amount: storeItem.priceInCents
-                    },
-                    quantity: item.quantity
-                }
-            }),
-            success_url: 'https://escape-game-cz.herokuapp.com/success.html',
-            cancel_url: 'https://escape-game-cz.herokuapp.com/cancel.html'
+                        quantity: item.quantity
+                    }
+                }),
+                success_url: 'https://escape-game-cz.herokuapp.com/checkout/game/' + random_string,
+                cancel_url: 'https://escape-game-cz.herokuapp.com/checkout/cancel.html'
+            })
+
+        client.set(random_string, 'example@example.com', (err, reply) => {
+            console.log(reply)
         })
+
+        client.expire(random_string, expire_time, (err, reply) => {
+            console.log(reply)
+        })
+
         res.json({ url: session.url })
     } catch (e) {
         res.status(500).json({ error: e.message })
@@ -94,6 +89,10 @@ app.get('*', (req, res) => {
         // Availability to get any files from /default folder on call
         get_file = get_path.split('/default/')[1]
         res.sendFile(get_file, { root: './default' })
+    } else if (get_path.startsWith('/checkout/')) {
+        // Availability to get any files from /default folder on call
+        get_file = get_path.split('/checkout/')[1]
+        res.sendFile(get_file, { root: './checkout' })
     } else {
         // If not calling public or default folder, then respond with default file
         res.sendFile('index.html', { root: './default' })
