@@ -51,15 +51,16 @@ app.get('/game/:id', (req, res) => {
 
 app.get('*', (req, res) => {
     // Get all paths
-    const get_path = req.params[0],
-        get_last_path = get_path.split('/public/')[1]
+    const get_path = req.params[0]
+    var get_file = get_path.split('/public/')[1]
 
-    if (get_path.startsWith('/public/') && get_last_path != 'index.html') {
+    if (get_path.startsWith('/public/') && get_file != 'index.html') {
         // Availability to get any files from /public folder on call
-        res.sendFile(get_last_path, { root: './public' })
+        res.sendFile(get_file, { root: './public' })
     } else if (get_path.startsWith('/default/')) {
         // Availability to get any files from /default folder on call
-        res.sendFile(get_last_path, { root: './default' })
+        get_file = get_path.split('/default/')[1]
+        res.sendFile(get_file, { root: './default' })
     } else {
         // If not calling public or default folder, then respond with default file
         res.sendFile('index.html', { root: './default' })
