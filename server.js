@@ -35,6 +35,7 @@ client.on('connect', function () {
     // })
 });
 
+const bodyParser = require('body-parser')
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
 const storeItems = new Map([
     [1, { priceInCents: 10000, name: 'Learn React Today' }],
@@ -42,7 +43,7 @@ const storeItems = new Map([
 ])
 
 app.post('/creating-checkout-session', async (req, res) => {
-    console.log('trying', req.body)
+    console.log('trying', req.bodyParser.body)
     try {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
