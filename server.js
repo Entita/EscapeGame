@@ -36,10 +36,19 @@ client.on('connect', function () {
     //     console.log(reply);
     // });
 
-    const random_string = randomString(8)
+    const random_string = randomString(32),
+        expire_time = 10
 
     console.log(random_string)
-    client.set('example@example.com', random_string, (err, reply) => {
+    client.set(random_string, 'example@example.com', (err, reply) => {
+        console.log(reply)
+    })
+
+    client.expire(random_string, expire_time, (err, reply) => {
+        console.log(reply)
+    })
+
+    client.ttl(randomString, (err, reply) => {
         console.log(reply)
     })
 
@@ -47,9 +56,15 @@ client.on('connect', function () {
         console.log(reply)
     })
 
-    client.exists('example@example.com', (err, reply) => {
-        console.log(reply)
-    })
+    setTimeout(() => {
+        client.ttl(randomString, (err, reply) => {
+            console.log(reply)
+        })
+
+        client.exists(randomString, (err, reply) => {
+            console.log(reply)
+        })
+    }, 15000)
 });
 
 app.get('/game/:id', (req, res) => {
