@@ -1,26 +1,33 @@
 // Server config
-const express = require('express');
-const app = express();
-const server = require('http').createServer(app);
+const express = require('express')
+const app = express()
+const server = require('http').createServer(app)
+const bodyParser = require('body-parser')
 
 // Redis
-const redis = require("redis");
-const client = redis.createClient(process.env.REDIS_URL);
+const redis = require("redis")
+const client = redis.createClient(process.env.REDIS_URL)
+
+// Stripe
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
+const storeItems = new Map([
+    [1, { priceInCents: 10000, name: 'Learn React Today' }],
+    [2, { priceInCents: 20000, name: 'Learn CSS Today' }]
+])
 
 // Functions
 function randomString(length) {
-    var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
+    var result = ''
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    var charactersLength = characters.length
     for (var i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() *
-            charactersLength));
+        result += characters.charAt(Math.floor(Math.random() * charactersLength))
     }
-    return result;
+    return result
 }
 
 client.on('connect', function () {
-    console.log('Redis connected!'); // Connected!
+    console.log('Redis connected!') // Connected!
 
     // const random_string = randomString(64),
     //     expire_time = 60
@@ -35,16 +42,11 @@ client.on('connect', function () {
     // })
 });
 
-const bodyParser = require('body-parser')
-const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
-const storeItems = new Map([
-    [1, { priceInCents: 10000, name: 'Learn React Today' }],
-    [2, { priceInCents: 20000, name: 'Learn CSS Today' }]
-])
+app.use(bodyParser())
 
 app.post('/creating-checkout-session', async (req, res) => {
-    console.log('trying', req.bodyParser)
-    console.log(req.bodyParser.json())
+    console.log('trying', req.body)
+    console.log(req.body.items)
     try {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
