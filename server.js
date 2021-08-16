@@ -24,7 +24,7 @@ client.on('connect', function () {
     // client.lrange('keys', 0, -1, function (err, reply) {
     //     console.log(reply);
     // });
-    function randomString(length) {
+    async function randomString(length) {
         var result = '';
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         var charactersLength = characters.length;
@@ -34,8 +34,8 @@ client.on('connect', function () {
         }
         return result;
     }
-
-    const random_string = randomString()
+    
+    const random_string = await randomString()
     console.log(random_string)
     client.set('example@example.com', random_string, (err, reply) => {
         console.log(reply)
