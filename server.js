@@ -21,13 +21,13 @@ function randomString(length) {
 client.on('connect', function () {
     console.log('Redis connected!'); // Connected!
 
-    const random_string = randomString(64),
+    const random_string = 'test',
         expire_time = 10
 
     console.log(random_string)
-    // client.set(random_string, 'example@example.com', (err, reply) => {
-    //     console.log(reply)
-    // })
+    client.set(random_string, 'example@example.com', (err, reply) => {
+        console.log(reply)
+    })
 
     // client.expire(random_string, expire_time, (err, reply) => {
     //     console.log(reply)
