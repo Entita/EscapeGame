@@ -49,7 +49,7 @@ app.post('/creating-checkout-session', async (req, res) => {
                     }
                 }),
                 success_url: 'https://escape-game-cz.herokuapp.com/game/' + random_string,
-                cancel_url: 'https://escape-game-cz.herokuapp.com/checkout/cancel.html'
+                cancel_url: 'https://escape-game-cz.herokuapp.com'
             })
 
         client.set(random_string, 'example@example.com')
@@ -84,10 +84,6 @@ app.get('*', (req, res) => {
         // Availability to get any files from /default folder on call
         get_file = get_path.split('/default/')[1]
         res.sendFile(get_file, { root: './default' })
-    } else if (get_path.startsWith('/checkout/')) {
-        // Availability to get any files from /default folder on call
-        get_file = get_path.split('/checkout/')[1]
-        res.sendFile(get_file, { root: './checkout' })
     } else {
         // If not calling public or default folder, then respond with default file
         res.sendFile('index.html', { root: './default' })
