@@ -48,7 +48,7 @@ app.post('/creating-checkout-session', async (req, res) => {
                         quantity: item.quantity
                     }
                 }),
-                success_url: 'https://escape-game-cz.herokuapp.com/checkout/game/' + random_string,
+                success_url: 'https://escape-game-cz.herokuapp.com/game/' + random_string,
                 cancel_url: 'https://escape-game-cz.herokuapp.com/checkout/cancel.html'
             })
 
