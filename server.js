@@ -21,59 +21,27 @@ function randomString(length) {
 client.on('connect', function () {
     console.log('Redis connected!'); // Connected!
 
-    // Add a key
-    // client.rpush(['keys', 'test_key'], function (err, reply) {
-    //     console.log(reply);
-    // });
-
-    // Delete a key
-    // client.lrem('keys', 0, 'test_key', function (err, reply) {
-    //     console.log('deleted', reply); // 1
-    // });
-
-    // Show a list
-    // client.lrange('keys', 0, -1, function (err, reply) {
-    //     console.log(reply);
-    // });
-    client.del('example@example.com', function (err, reply) {
-        console.log(reply)
-    })
-
-    const random_string = randomString(32),
+    const random_string = randomString(64),
         expire_time = 10
 
     console.log(random_string)
-    client.set(random_string, 'example@example.com', (err, reply) => {
-        console.log(reply)
-    })
+    // client.set(random_string, 'example@example.com', (err, reply) => {
+    //     console.log(reply)
+    // })
 
-    client.expire(random_string, expire_time, (err, reply) => {
-        console.log(reply)
-    })
+    // client.expire(random_string, expire_time, (err, reply) => {
+    //     console.log(reply)
+    // })
 
-    client.ttl(random_string, (err, reply) => {
-        console.log(reply)
-    })
-
-    client.exists(random_string, (err, reply) => {
-        console.log(reply)
-    })
-
-    setTimeout(() => {
-        client.ttl(random_string, (err, reply) => {
-            console.log(reply)
-        })
-
-        client.exists(random_string, (err, reply) => {
-            console.log(reply)
-        })
-    }, 15000)
+    // client.exists(random_string, (err, reply) => {
+    //     console.log(reply)
+    // })
 });
 
 app.get('/game/:id', (req, res) => {
     const client_key = req.params.id
-    client.lpos('keys', client_key, (err, reply) => {
-        if (reply != null) {
+    client.exists(client_key, (err, reply) => {
+        if (reply === 1) {
             res.sendFile('index.html', { root: './public' })
         } else {
             res.send('Key doesn\'t exists')
@@ -83,15 +51,14 @@ app.get('/game/:id', (req, res) => {
 
 app.get('*', (req, res) => {
     // Get all paths
-    const get_path = req.params[0]
+    const get_path = req.params[0],
+        get_last_path = get_path.split('/public/')[1]
 
-    if (get_path.startsWith('/public/')) {
+    if (get_path.startsWith('/public/') && get_last_path != 'index.html') {
         // Availability to get any files from /public folder on call
-        const get_last_path = get_path.split('/public/')[1]
         res.sendFile(get_last_path, { root: './public' })
     } else if (get_path.startsWith('/default/')) {
         // Availability to get any files from /default folder on call
-        const get_last_path = get_path.split('/default/')[1]
         res.sendFile(get_last_path, { root: './default' })
     } else {
         // If not calling public or default folder, then respond with default file
