@@ -16,14 +16,16 @@ client.on('connect', function () {
     // });
 
     // Delete a key
-    // client.lrem('keys', 0, 'test_key2', function (err, reply) {
-    //     console.log('deleted', reply); // 1
-    // });
+    client.lrem('keys', 0, 'test_key', function (err, reply) {
+        console.log('deleted', reply); // 1
+    });
 
     // Show a list
     client.lrange('keys', 0, -1, function (err, reply) {
         console.log(reply);
     });
+
+
 });
 
 app.get('/game/:id', (req, res) => {
