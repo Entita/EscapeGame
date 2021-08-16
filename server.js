@@ -35,6 +35,9 @@ client.on('connect', function () {
     // client.lrange('keys', 0, -1, function (err, reply) {
     //     console.log(reply);
     // });
+    client.del('example@example.com', function (err, reply) {
+        console.log(reply)
+    })
 
     const random_string = randomString(32),
         expire_time = 10
@@ -48,20 +51,20 @@ client.on('connect', function () {
         console.log(reply)
     })
 
-    client.ttl(randomString, (err, reply) => {
+    client.ttl(random_string, (err, reply) => {
         console.log(reply)
     })
 
-    client.exists(randomString, (err, reply) => {
+    client.exists(random_string, (err, reply) => {
         console.log(reply)
     })
 
     setTimeout(() => {
-        client.ttl(randomString, (err, reply) => {
+        client.ttl(random_string, (err, reply) => {
             console.log(reply)
         })
 
-        client.exists(randomString, (err, reply) => {
+        client.exists(random_string, (err, reply) => {
             console.log(reply)
         })
     }, 15000)
