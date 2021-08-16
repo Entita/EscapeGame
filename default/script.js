@@ -37,7 +37,7 @@ var app = new Vue({
             const cursor = document.querySelector('.cursor')
             cursor.classList.remove('expand')
         },
-        buyCheck() {
+        buyCheck(id) {
             fetch('/creating-checkout-session', {
                 method: 'POST',
                 headers: {
@@ -45,7 +45,7 @@ var app = new Vue({
                 },
                 body: JSON.stringify({
                     items: [
-                        { id: 1, quantity: 1 }
+                        { id: id }
                     ]
                 })
             }).then(res => {

@@ -15,7 +15,8 @@
     <div id="app" v-cloak>
         <div class="cursor"></div>
         <div id="intro">
-            <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="buyCheck">Play</button>
+            <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="buyCheck(1)">Kup hru na 1hod</button>
+            <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="buyCheck(2)">Kup hru navždy</button>
         </div>
     </div>
 

@@ -11,8 +11,8 @@ const client = redis.createClient(process.env.REDIS_URL)
 // Stripe
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
 const storeItems = new Map([
-    [1, { priceInCents: 10000, name: 'Learn React Today' }],
-    [2, { priceInCents: 20000, name: 'Learn CSS Today' }]
+    [1, { priceInCents: 7000, name: 'Kup si escape hru na 1hod' }],
+    [2, { priceInCents: 20000, name: 'Kup si escape hru na neurčitou dobu' }]
 ])
 
 // Functions
@@ -45,7 +45,7 @@ app.post('/creating-checkout-session', async (req, res) => {
                             },
                             unit_amount: storeItem.priceInCents
                         },
-                        quantity: item.quantity
+                        quantity: 1
                     }
                 }),
                 success_url: 'https://escape-game-cz.herokuapp.com/game/' + random_string,
