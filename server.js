@@ -52,13 +52,8 @@ app.post('/creating-checkout-session', async (req, res) => {
                 cancel_url: 'https://escape-game-cz.herokuapp.com/checkout/cancel.html'
             })
 
-        client.set(random_string, 'example@example.com', (err, reply) => {
-            console.log(reply)
-        })
-
-        client.expire(random_string, expire_time, (err, reply) => {
-            console.log(reply)
-        })
+        client.set(random_string, 'example@example.com')
+        client.expire(random_string, expire_time)
 
         res.json({ url: session.url })
     } catch (e) {
