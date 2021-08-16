@@ -37,23 +37,23 @@ app.get('/game/:id', (req, res) => {
     })
 })
 
-app.get('*', (req, res) => {
-    // Get all paths
-    const get_path = req.params[0]
+// app.get('*', (req, res) => {
+//     // Get all paths
+//     const get_path = req.params[0]
 
-    if (get_path.startsWith('/public/')) {
-        // Availability to get any files from /public folder on call
-        const get_last_path = get_path.split('/public/')[1]
-        res.sendFile(get_last_path, { root: './public' })
-    } else if (get_path.startsWith('/default/')) {
-        // Availability to get any files from /default folder on call
-        const get_last_path = get_path.split('/default/')[1]
-        res.sendFile(get_last_path, { root: './default' })
-    } else {
-        // If not calling public or default folder, then respond with default file
-        res.sendFile('index.html', { root: './default' })
-    }
-})
+//     if (get_path.startsWith('/public/')) {
+//         // Availability to get any files from /public folder on call
+//         const get_last_path = get_path.split('/public/')[1]
+//         res.sendFile(get_last_path, { root: './public' })
+//     } else if (get_path.startsWith('/default/')) {
+//         // Availability to get any files from /default folder on call
+//         const get_last_path = get_path.split('/default/')[1]
+//         res.sendFile(get_last_path, { root: './default' })
+//     } else {
+//         // If not calling public or default folder, then respond with default file
+//         res.sendFile('index.html', { root: './default' })
+//     }
+// })
 
 server.listen(process.env.PORT || 3000, (req, res) => {
     console.log('Server is listening ...')
