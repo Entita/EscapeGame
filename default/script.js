@@ -62,7 +62,7 @@ var app = new Vue({
             return re.test(String(email).toLowerCase());
         },
         validateForm(email, username, password, password2) {
-            if (((password !== password2) || !this.validateEmail(email)) && (email.length > 8 && username.length > 8 && password.length > 8)) return false
+            if (((password !== password2) || !this.validateEmail(email)) || email.length < 8 || username.length < 8 || password.length < 8) return false
             return true
         },
         createAccount() {
