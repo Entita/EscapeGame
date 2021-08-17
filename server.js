@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 
 // Redis
 const redis = require("redis")
+const { stringify } = require('querystring')
 const client = redis.createClient(process.env.REDIS_URL)
 
 // Stripe
@@ -20,16 +21,17 @@ var user = {
     password: 'password'
 }
 
-client.sadd('users', user)
+client.sadd('users', stringify(user))
 client.smembers('users', (err, reply) => {
     console.log(reply)
 })
 
 user.username = 'BLA'
 
-client.sadd('users', user)
+client.sadd('users', stringify(user))
 client.smembers('users', (err, reply) => {
     console.log(reply)
+    console.log(JSON.parse(reply))
 })
 
 // Functions
