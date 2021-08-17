@@ -33,6 +33,7 @@ client.smembers('users', (err, reply) => {
     console.log(reply)
     reply.map(user => {
         console.log('user', typeof user)
+        console.log(JSON.parse(user), typeof JSON.parse(user))
         console.log(user.email, user.username, user.password)
     })
 })
