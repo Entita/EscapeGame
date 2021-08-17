@@ -32,9 +32,8 @@ client.smembers('users', (err, reply) => {
         user = JSON.parse(user)
         users[user.email] = user
     })
+    console.log(users)
 })
-
-console.log(users)
 
 // Functions
 function randomString(length) {
