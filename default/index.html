@@ -18,7 +18,7 @@
             <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="buyCheck(1)">Kup hru na 1hod</button>
             <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="buyCheck(2)">Kup hru navždy</button>
         </div>
-        <form @submit="createAccount">
+        <form @submit="createAccount" novalidate="true">
             <input id="create-account-username" type="text" placeholer="Username">
             <input id="create-account-email" type="email" placeholer="Email">
             <input id="create-account-password" type="password" placeholer="Password">
