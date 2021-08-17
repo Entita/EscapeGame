@@ -15,24 +15,24 @@ const storeItems = new Map([
     [1, { priceInCents: 7000, name: 'Kup si escape hru na 1hod' }],
     [2, { priceInCents: 20000, name: 'Kup si escape hru na neurčitou dobu' }]
 ])
-var user = {
+var new_user = {
     email: 'example@example.com',
     username: 'Username',
     password: 'password'
 }
 
-client.sadd('users', stringify(user))
+client.sadd('users', stringify(new_user))
 client.smembers('users', (err, reply) => {
     console.log(reply)
 })
 
-user.username = 'BLA'
+new_user.username = 'BLA'
 
-client.sadd('users', stringify(user))
+client.sadd('users', stringify(new_user))
 client.smembers('users', (err, reply) => {
     console.log(reply)
     reply.map(user => {
-        console.log(JSON.parse(user))
+        console.log(user)
     })
 })
 
