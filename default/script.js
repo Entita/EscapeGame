@@ -151,6 +151,11 @@ var app = new Vue({
                     console.error(e.error)
                 })
             }
+        },
+        logOut() {
+            localStorage.removeItem('loginToken')
+            loginToken = {}
+            alert('Log Out')
         }
     }
 })
