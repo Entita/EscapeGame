@@ -91,7 +91,18 @@ app.post('/create-account', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-    console.log(req)
+    try {
+        const email = req.body.email,
+            password = req.body.password
+        console.log(email, password)
+        if (users[email]) {
+            res.json({ success: users[email].password === password })
+        } else {
+            res.json({ success: 'user not found' })
+        }
+    } catch (e) {
+        res.status(500).json({ error: e.message })
+    }
 })
 
 app.get('/game/:id', (req, res) => {

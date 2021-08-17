@@ -62,7 +62,7 @@ var app = new Vue({
             return re.test(String(email).toLowerCase());
         },
         validateForm(email, username, password, password2) {
-            if (((password !== password2) || !this.validateEmail(email)) || email.length < 8 || username.length < 8 || password.length < 8) return false
+            if (((password !== password2) || !this.validateEmail(email)) || username.length < 5 || password.length < 8) return false
             return true
         },
         createAccount() {
@@ -95,7 +95,30 @@ var app = new Vue({
             }
         },
         loginCheck() {
-
+            const email = document.getElementById('login-email'),
+                password = document.getElementById('login-password')
+            if (email.length > 0 && password.length > 0) {
+                fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                }).then(res => {
+                    if (res.ok) return res.json()
+                    return res.json().then(json => Promise.reject(json))
+                }).then(({ success }) => {
+                    console.log(success)
+                }).catch(e => {
+                    console.error(e.error)
+                })
+            } else {
+                // Error handler
+                alert('empty')
+            }
         }
     }
 })

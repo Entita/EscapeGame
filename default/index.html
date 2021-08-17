@@ -29,11 +29,13 @@
             <input id="create-account-password-repeat" type="password" placeholder="Repeat password" name="create-password2">
             <button @click="createAccount">Create account</button>
         </div>
-        <form @submit="loginCheck">
-            <input type="email" placeholer="Email">
-            <input type="password" placeholer="Password">
-            <button>Log In</button>
-        </form>
+        <div>
+            <label for="login-email">Username</label>
+            <input id="login-email" type="email" placeholder="Email" name="login-email">
+            <label for="login-password">Password</label>
+            <input id="login-password" type="password" placeholder="Password" name="login-password">
+            <button @click="loginCheck">Log In</button>
+        </div>
     </div>
 
     <script type="text/javascript" src="/default/script.js"></script>
