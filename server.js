@@ -15,30 +15,26 @@ const storeItems = new Map([
     [1, { priceInCents: 7000, name: 'Kup si escape hru na 1hod' }],
     [2, { priceInCents: 20000, name: 'Kup si escape hru na neurčitou dobu' }]
 ])
-var new_user = {
-    email: 'example@example.com',
-    username: 'Username',
-    password: 'password'
-},
-    new_user_string = JSON.stringify(new_user)
 
-client.flushall()
+// Redis users
+// var new_user = {
+//     email: 'example@example.com',
+//     username: 'Username',
+//     password: 'password'
+// },
+//     new_user_string = JSON.stringify(new_user)
 
-client.sadd('users', new_user_string)
+// client.sadd('users', new_user_string)
+const users = new Object()
 
-new_user.username = 'BLA'
-new_user_string = JSON.stringify(new_user)
-
-client.sadd('users', new_user_string)
 client.smembers('users', (err, reply) => {
-    console.log(reply)
     reply.map(user => {
         user = JSON.parse(user)
-        console.log('user', typeof user, user)
-        
-        console.log(user.email, user.username, user.password)
+        users[user.email] = user
     })
 })
+
+console.log(users)
 
 // Functions
 function randomString(length) {
