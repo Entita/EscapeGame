@@ -67,6 +67,7 @@ var app = new Vue({
             return true
         },
         createAccount() {
+            console.log('test')
             const email = document.getElementById('create-account-email').value,
                 username = document.getElementById('create-account-username').value,
                 password = document.getElementById('create-account-password').value,
