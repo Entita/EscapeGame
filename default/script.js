@@ -57,26 +57,44 @@ var app = new Vue({
                 console.error(e.error)
             })
         },
+        validateEmail() {
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        },
+        validateForm(email, username, password, password2) {
+            if (this.validateEmail(email)) return false
+            if (password !== password2) return false
+            return true
+        },
         createAccount() {
-            fetch('/create-account', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: document.getElementById('create-account-email').value,
-                    username: document.getElementById('create-account-username').value,
-                    password: document.getElementById('create-account-password').value,
-                    password2: document.getElementById('create-account-password-repeat').value
+            const email = document.getElementById('create-account-email').value,
+                username = document.getElementById('create-account-username').value,
+                password = document.getElementById('create-account-password').value,
+                password2 = document.getElementById('create-account-password-repeat').value
+            if (this.validateForm(email, username, password, password2)) {
+                fetch('/create-account', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: document.getElementById('create-account-email').value,
+                        username: document.getElementById('create-account-username').value,
+                        password: document.getElementById('create-account-password').value,
+                        password2: document.getElementById('create-account-password-repeat').value
+                    })
+                }).then(res => {
+                    if (res.ok) return res.json()
+                    return res.json().then(json => Promise.reject(json))
+                }).then(({ success }) => {
+                    console.log(success)
+                }).catch(e => {
+                    console.error(e.error)
                 })
-            }).then(res => {
-                if (res.ok) return res.json()
-                return res.json().then(json => Promise.reject(json))
-            }).then(({ success }) => {
-                console.log(success)
-            }).catch(e => {
-                console.error(e.error)
-            })
+            } else {
+                // Error handler
+                alert('wrong input')
+            }
         },
         loginCheck() {
 
