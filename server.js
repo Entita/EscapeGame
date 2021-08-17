@@ -14,6 +14,23 @@ const storeItems = new Map([
     [1, { priceInCents: 7000, name: 'Kup si escape hru na 1hod' }],
     [2, { priceInCents: 20000, name: 'Kup si escape hru na neurčitou dobu' }]
 ])
+var user = {
+    email: 'example@example.com',
+    username: 'Username',
+    password: 'password'
+}
+
+client.sadd('users', user)
+client.smembers('users', (err, reply) => {
+    console.log(reply)
+})
+
+user.username = 'BLA'
+
+client.sadd('users', user)
+client.smembers('users', (err, reply) => {
+    console.log(reply)
+})
 
 // Functions
 function randomString(length) {
