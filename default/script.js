@@ -113,11 +113,11 @@ var app = new Vue({
                 }).then(({ res }) => {
                     console.log(res, res === 'user')
                     if (res==='user') {
-                        // Logged in
-                        alert('Logged in')
-                    } else if (res) {
                         // User not found
                         alert('User not found')
+                    } else if (res) {
+                        // Logged in
+                        alert('Logged in')
                     } else {
                         // Wrong password
                         alert('Wrong password')
