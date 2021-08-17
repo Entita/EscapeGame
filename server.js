@@ -21,18 +21,18 @@ var new_user = {
     password: 'password'
 }
 
-client.sadd('users', stringify(new_user))
+client.sadd('users', JSON.stringify(new_user))
 client.smembers('users', (err, reply) => {
     console.log(reply)
 })
 
 new_user.username = 'BLA'
 
-client.sadd('users', stringify(new_user))
+client.sadd('users', JSON.stringify(new_user))
 client.smembers('users', (err, reply) => {
     console.log(reply)
     reply.map(user => {
-        console.log(user)
+        console.log(JSON.parse(user))
     })
 })
 
