@@ -31,7 +31,9 @@ user.username = 'BLA'
 client.sadd('users', stringify(user))
 client.smembers('users', (err, reply) => {
     console.log(reply)
-    console.log(JSON.parse(reply))
+    reply.map(user => {
+        console.log(JSON.parse(user))
+    })
 })
 
 // Functions
