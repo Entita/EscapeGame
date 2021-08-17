@@ -17,14 +17,6 @@ const storeItems = new Map([
 ])
 
 // Redis users
-// var new_user = {
-//     email: 'example@example.com',
-//     username: 'Username',
-//     password: 'password'
-// },
-//     new_user_string = JSON.stringify(new_user)
-
-// client.sadd('users', new_user_string)
 const users = new Object()
 
 client.smembers('users', (err, reply) => {
@@ -83,8 +75,13 @@ app.post('/creating-checkout-session', async (req, res) => {
 
 app.post('/create-account', (req, res) => {
     try {
-        console.log(req.body)
-        res.json({ success: 'NICE' })
+        const new_user = {
+            email: req.body.email,
+            username: req.body.username,
+            password: req.body.password
+        }
+        client.sadd('users', JSON.stringify(new_user))
+        res.json({ success: true })
     } catch (e) {
         res.status(500).json({ error: e.message })
     }
@@ -94,11 +91,10 @@ app.post('/login', (req, res) => {
     try {
         const email = req.body.email,
             password = req.body.password
-        console.log(email, password)
         if (users[email]) {
             res.json({ success: users[email].password === password })
         } else {
-            res.json({ success: 'user not found' })
+            res.json({ success: 'user' })
         }
     } catch (e) {
         res.status(500).json({ error: e.message })

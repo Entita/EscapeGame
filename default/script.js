@@ -97,8 +97,7 @@ var app = new Vue({
         loginCheck() {
             const email = document.getElementById('login-email').value,
                 password = document.getElementById('login-password').value
-            console.log(email.length, password.length, this.validateEmail(email))
-            if (email.length > 0 && password.length > 0 && this.validateEmail(email)) {
+            if (password.length > 7 && this.validateEmail(email)) {
                 fetch('/login', {
                     method: 'POST',
                     headers: {
@@ -112,7 +111,16 @@ var app = new Vue({
                     if (res.ok) return res.json()
                     return res.json().then(json => Promise.reject(json))
                 }).then(({ success }) => {
-                    console.log(success)
+                    if (success) {
+                        // Logged in
+                        
+                    } else if (success === 'user') {
+                        // User not found
+
+                    } else {
+                        // Wrong password
+
+                    }
                 }).catch(e => {
                     console.error(e.error)
                 })
