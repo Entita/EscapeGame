@@ -33,7 +33,7 @@ client.smembers('users', (err, reply) => {
     console.log(reply)
     reply.map(user => {
         console.log('user', user)
-        console.log(user.email, user.username, user.password)
+        console.log(user['email'], user['username'], user['password'])
     })
 })
 
