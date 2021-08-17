@@ -140,8 +140,9 @@ var app = new Vue({
                     } else if (success) {
                         // Logged in
                         alert('Logged in')
-                        localStorage.setItem('loginToken', user.email)
-                        this.loginToken = localStorage.getItem('loginToken')
+                        localStorage.setItem('loginToken', JSON.stringify(user))
+                        console.log(localStorage.getItem('loginToken'), JSON.parse(localStorage.getItem('loginToken')))
+                        this.loginToken = JSON.parse(localStorage.getItem('loginToken'))
                     } else {
                         // Wrong password
                         alert('Wrong password')
