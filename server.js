@@ -82,7 +82,7 @@ app.post('/create-account', (req, res) => {
         }
         client.sadd('users', JSON.stringify(new_user))
         users[new_user.email] = new_user
-        res.json({ success: [true, new_user] })
+        res.json({ success: true })
     } catch (e) {
         res.status(500).json({ error: e.message })
     }
@@ -93,7 +93,7 @@ app.post('/login', (req, res) => {
         const email = req.body.email,
             password = req.body.password
         if (users[email]) {
-            res.json({ success: users[email].password === password })
+            res.json({ success: users[email].password === password, user: users[email] })
         } else {
             res.json({ success: 'user' })
         }
