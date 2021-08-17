@@ -111,6 +111,7 @@ var app = new Vue({
                     if (res.ok) return res.json()
                     return res.json().then(json => Promise.reject(json))
                 }).then(({ success }) => {
+                    console.log(success)
                     if (success) {
                         // Logged in
                         alert('Logged in')
