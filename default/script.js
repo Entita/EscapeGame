@@ -83,7 +83,8 @@ var app = new Vue({
                 return true
             }
         },
-        createAccount() {
+        createAccount(e) {
+            e.preventDefault()
             const email = document.getElementById('create-account-email').value,
                 username = document.getElementById('create-account-username').value,
                 password = document.getElementById('create-account-password').value,
@@ -114,7 +115,8 @@ var app = new Vue({
                 alert('wrong input')
             }
         },
-        loginCheck() {
+        loginCheck(e) {
+            e.preventDefault()
             const email = document.getElementById('login-email').value,
                 password = document.getElementById('login-password').value
             if (password.length < 8) {

@@ -24,17 +24,17 @@
             <label for="create-email">Email</label>
             <input id="create-account-email" type="email" placeholder="Email" name="create-email">
             <label for="create-password1">Password</label>
-            <input id="create-account-password" type="password" placeholder="Password" name="create-password1">
+            <input id="create-account-password" type="password" placeholder="Password" name="create-password1" autocomplete="new-password">
             <label for="create-password2">Repeat password</label>
-            <input id="create-account-password-repeat" type="password" placeholder="Repeat password" name="create-password2">
-            <button @click="createAccount">Create account</button>
+            <input id="create-account-password-repeat" type="password" placeholder="Repeat password" name="create-password2" autocomplete="new-password">
+            <button @click="createAccount($event)">Create account</button>
         </form>
         <form>
             <label for="login-name-email">Username</label>
             <input id="login-email" type="email" placeholder="Email" name="login-name-email">
             <label for="login-name-password">Password</label>
-            <input id="login-password" type="password" placeholder="Password" name="login-name-password">
-            <button @click="loginCheck">Log In</button>
+            <input id="login-password" type="password" placeholder="Password" name="login-name-password" autocomplete="password">
+            <button @click="loginCheck($event)">Log In</button>
         </form>
         <button id="logout" v-if="loginToken" @click="logOut">Log Out</button>
     </div>
