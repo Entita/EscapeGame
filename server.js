@@ -32,7 +32,7 @@ client.sadd('users', JSON.stringify(new_user))
 client.smembers('users', (err, reply) => {
     console.log(reply)
     reply.map(user => {
-        console.log(JSON.parse(user))
+        console.log(user)
     })
 })
 
