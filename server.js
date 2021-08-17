@@ -84,7 +84,7 @@ app.post('/creating-checkout-session', async (req, res) => {
 app.post('/create-account', (req, res) => {
     try {
         console.log(req.body)
-        res.json('success', req.body)
+        res.json({ success: 'NICE' })
     } catch (e) {
         res.status(500).json({ error: e.message })
     }

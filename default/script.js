@@ -84,7 +84,7 @@ var app = new Vue({
                 }).then(res => {
                     if (res.ok) return res.json()
                     return res.json().then(json => Promise.reject(json))
-                }).then(( success ) => {
+                }).then(({ success }) => {
                     console.log(success)
                 }).catch(e => {
                     console.error(e.error)
