@@ -62,11 +62,10 @@ var app = new Vue({
             return re.test(String(email).toLowerCase());
         },
         validateForm(email, username, password, password2) {
-            if ((password !== password2) || !this.validateEmail(email)) return false
+            if (((password !== password2) || !this.validateEmail(email)) && email.length > 8 && username.length > 8 && password.length > 8) return false
             return true
         },
         createAccount() {
-            console.log('test')
             const email = document.getElementById('create-account-email').value,
                 username = document.getElementById('create-account-username').value,
                 password = document.getElementById('create-account-password').value,
@@ -78,15 +77,14 @@ var app = new Vue({
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        email: document.getElementById('create-account-email').value,
-                        username: document.getElementById('create-account-username').value,
-                        password: document.getElementById('create-account-password').value,
-                        password2: document.getElementById('create-account-password-repeat').value
+                        email: email,
+                        username: username,
+                        password: password
                     })
                 }).then(res => {
                     if (res.ok) return res.json()
                     return res.json().then(json => Promise.reject(json))
-                }).then(({ success }) => {
+                }).then(( success ) => {
                     console.log(success)
                 }).catch(e => {
                     console.error(e.error)

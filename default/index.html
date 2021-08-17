@@ -19,10 +19,14 @@
             <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="buyCheck(2)">Kup hru navždy</button>
         </div>
         <div>
-            <input id="create-account-username" type="text" placeholer="Username">
-            <input id="create-account-email" type="email" placeholer="Email">
-            <input id="create-account-password" type="password" placeholer="Password">
-            <input id="create-account-password-repeat" type="password" placeholer="Repeat password">
+            <label for="create-username">Username</label>
+            <input id="create-account-username" type="text" placeholer="Username" name="create-username">
+            <label for="create-email">Email</label>
+            <input id="create-account-email" type="email" placeholer="Email" name="create-email">
+            <label for="create-password1">Password</label>
+            <input id="create-account-password" type="password" placeholer="Password" name="create-password1">
+            <label for="create-password2">Repeat password</label>
+            <input id="create-account-password-repeat" type="password" placeholer="Repeat password" name="create-password2">
             <button @click="createAccount">Create account</button>
         </div>
         <form @submit="loginCheck">
