@@ -112,10 +112,10 @@ var app = new Vue({
                     return res.json().then(json => Promise.reject(json))
                 }).then(({ res }) => {
                     console.log(res, res === 'user')
-                    if (res) {
+                    if (res==='user') {
                         // Logged in
                         alert('Logged in')
-                    } else if (res === 'user') {
+                    } else if (res) {
                         // User not found
                         alert('User not found')
                     } else {
