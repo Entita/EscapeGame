@@ -19,21 +19,23 @@ var new_user = {
     email: 'example@example.com',
     username: 'Username',
     password: 'password'
-}
-
-client.sadd('users', JSON.stringify(new_user))
+},
+    new_user_string = JSON.stringify(new_user)
+console.log('string', new_user, new_user_string)
+client.sadd('users', new_user_string)
 client.smembers('users', (err, reply) => {
     console.log(reply)
 })
 
 new_user.username = 'BLA'
+new_user_string = JSON.stringify(new_user)
 
-client.sadd('users', JSON.stringify(new_user))
+client.sadd('users', new_user_string)
 client.smembers('users', (err, reply) => {
     console.log(reply)
     reply.map(user => {
         console.log('user', typeof user, user)
-        
+
         console.log(user.email, user.username, user.password)
     })
 })
