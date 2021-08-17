@@ -80,10 +80,8 @@ app.post('/create-account', (req, res) => {
             username: req.body.username,
             password: req.body.password
         }
-        console.log(new_user)
-        client.sadd('users', JSON.stringify(new_user), (err, reply) => {
-            console.log(reply)
-        })
+        client.sadd('users', JSON.stringify(new_user))
+        users[new_user.email] = new_user
         res.json({ success: true })
     } catch (e) {
         res.status(500).json({ error: e.message })
