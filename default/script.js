@@ -140,6 +140,7 @@ var app = new Vue({
                     } else if (success) {
                         // Logged in
                         alert('Logged in')
+                        console.log(user)
                         localStorage.setItem('loginToken', user)
                         this.loginToken = localStorage.getItem('loginToken')
                     } else {
