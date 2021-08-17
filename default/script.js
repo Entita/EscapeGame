@@ -29,9 +29,8 @@ var app = new Vue({
         })
 
         /* Login token */
-        console.log(this.loginToken)
         if (this.loginToken) {
-            alert('Logged in through a token as ' + loginToken)
+            alert('Logged in through a token as ' + this.loginToken)
         }
     },
     methods: {
