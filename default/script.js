@@ -56,6 +56,30 @@ var app = new Vue({
             }).catch(e => {
                 console.error(e.error)
             })
+        },
+        createAccount() {
+            fetch('/create-account', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: document.getElementById('create-account-email').value,
+                    username: document.getElementById('create-account-username').value,
+                    password: document.getElementById('create-account-password').value,
+                    password2: document.getElementById('create-account-password-repeat').value
+                })
+            }).then(res => {
+                if (res.ok) return res.json()
+                return res.json().then(json => Promise.reject(json))
+            }).then(({ success }) => {
+                console.log(success)
+            }).catch(e => {
+                console.error(e.error)
+            })
+        },
+        loginCheck() {
+
         }
     }
 })

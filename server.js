@@ -82,7 +82,11 @@ app.post('/creating-checkout-session', async (req, res) => {
 })
 
 app.post('/create-account', (req, res) => {
-    console.log(req)
+    try {
+        console.log(req.body)
+    } catch (e) {
+        res.status(500).json({ error: e.message })
+    }
 })
 
 app.post('/login', (req, res) => {
