@@ -155,7 +155,7 @@ var app = new Vue({
         logOut() {
             localStorage.removeItem('loginToken')
             loginToken = {}
-            alert('Log Out')
+            alert('Logged Out')
         }
     }
 })
