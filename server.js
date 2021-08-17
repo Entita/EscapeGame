@@ -91,7 +91,8 @@ app.post('/login', (req, res) => {
     try {
         const email = req.body.email,
             password = req.body.password
-        if (users[email]) {
+        console.log(users[email])
+        if (users[email] != null) {
             res.json({ success: users[email].password === password })
         } else {
             res.json({ success: 'user' })
