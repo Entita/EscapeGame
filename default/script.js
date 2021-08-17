@@ -2,6 +2,7 @@ var app = new Vue({
     el: '#app',
     data() {
         return {
+            loginToken: {},
             colors: {
                 white: '#e6e6e6',
                 darkestBlueColor: '#071e26',
@@ -26,6 +27,12 @@ var app = new Vue({
         document.addEventListener('mouseleave', () => {
             cursor.setAttribute("style", "top: -25px")
         })
+
+        /* Login token */
+        const loginToken = localStorage.getItem('loginToken')
+        if (loginToken) {
+            alert('Logged in through a token as ', loginToken)
+        }
     },
     methods: {
         expandCursor() {
@@ -135,6 +142,7 @@ var app = new Vue({
                     } else if (success) {
                         // Logged in
                         alert('Logged in')
+                        localStorage.setItem('loginToken', email)
                     } else {
                         // Wrong password
                         alert('Wrong password')
