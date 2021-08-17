@@ -18,25 +18,33 @@
             <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="buyCheck(1)">Kup hru na 1hod</button>
             <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="buyCheck(2)">Kup hru navždy</button>
         </div>
-        <form>
-            <label for="create-username">Username</label>
-            <input id="create-account-username" type="text" placeholder="Username" name="create-username" autocomplete="new-username">
-            <label for="create-email">Email</label>
-            <input id="create-account-email" type="email" placeholder="Email" name="create-email" autocomplete="new-email">
-            <label for="create-password1">Password</label>
-            <input id="create-account-password" type="password" placeholder="Password" name="create-password1" autocomplete="new-password">
-            <label for="create-password2">Repeat password</label>
-            <input id="create-account-password-repeat" type="password" placeholder="Repeat password" name="create-password2" autocomplete="new-password">
-            <button @click="createAccount($event)">Create account</button>
-        </form>
-        <form>
-            <label for="login-name-email">Username</label>
-            <input id="login-email" type="email" placeholder="Email" name="login-name-email" autocomplete="username">
-            <label for="login-name-password">Password</label>
-            <input id="login-password" type="password" placeholder="Password" name="login-name-password" autocomplete="password">
-            <button @click="loginCheck($event)">Log In</button>
-        </form>
-        <button id="logout" v-if="loginToken" @click="logOut">Log Out</button>
+        <button v-if="loginToken" id="logout" @click="logOut">Log Out</button>
+        <div v-else>
+            <form>
+                <label for="create-username">Username</label>
+                <input id="create-account-username" type="text" placeholder="Username" name="create-username"
+                    autocomplete="new-username">
+                <label for="create-email">Email</label>
+                <input id="create-account-email" type="email" placeholder="Email" name="create-email"
+                    autocomplete="new-email">
+                <label for="create-password1">Password</label>
+                <input id="create-account-password" type="password" placeholder="Password" name="create-password1"
+                    autocomplete="new-password">
+                <label for="create-password2">Repeat password</label>
+                <input id="create-account-password-repeat" type="password" placeholder="Repeat password"
+                    name="create-password2" autocomplete="new-password">
+                <button @click="createAccount($event)">Create account</button>
+            </form>
+            <form>
+                <label for="login-name-email">Username</label>
+                <input id="login-email" type="email" placeholder="Email" name="login-name-email"
+                    autocomplete="username">
+                <label for="login-name-password">Password</label>
+                <input id="login-password" type="password" placeholder="Password" name="login-name-password"
+                    autocomplete="password">
+                <button @click="loginCheck($event)">Log In</button>
+            </form>
+        </div>
     </div>
 
     <script type="text/javascript" src="/default/script.js"></script>

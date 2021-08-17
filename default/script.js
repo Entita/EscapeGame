@@ -110,9 +110,6 @@ var app = new Vue({
                 }).catch(e => {
                     console.error(e.error)
                 })
-            } else {
-                // Error handler
-                alert('wrong input')
             }
         },
         loginCheck(e) {
