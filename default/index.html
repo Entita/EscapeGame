@@ -19,7 +19,7 @@
             <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="buyCheck(2)">Kup hru navždy</button>
         </div>
         <div v-if="loginToken">
-            <span>{{ loginToken.email }}</span>
+            <span>{{ loginToken }}</span>
             <button id="logout" @click="logOut">Log Out</button>
         </div>
         <div v-else>

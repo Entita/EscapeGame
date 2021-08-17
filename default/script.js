@@ -2,7 +2,7 @@ var app = new Vue({
     el: '#app',
     data() {
         return {
-            loginToken: JSON.parse(localStorage.getItem('loginToken')),
+            loginToken: localStorage.getItem('loginToken'),
             colors: {
                 white: '#e6e6e6',
                 darkestBlueColor: '#071e26',
@@ -140,8 +140,8 @@ var app = new Vue({
                     } else if (success) {
                         // Logged in
                         alert('Logged in')
-                        localStorage.setItem('loginToken', JSON.stringify(user))
-                        this.loginToken = JSON.parse(localStorage.getItem('loginToken'))
+                        localStorage.setItem('loginToken', user.email)
+                        this.loginToken = localStorage.getItem('loginToken')
                     } else {
                         // Wrong password
                         alert('Wrong password')
