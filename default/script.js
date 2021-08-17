@@ -95,8 +95,8 @@ var app = new Vue({
             }
         },
         loginCheck() {
-            const email = document.getElementById('login-email'),
-                password = document.getElementById('login-password')
+            const email = document.getElementById('login-input-email'),
+                password = document.getElementById('login-input-password')
             console.log(email.length, password.length, this.validateEmail(email))
             if (email.length > 0 && password.length > 0 && this.validateEmail(email)) {
                 fetch('/login', {
