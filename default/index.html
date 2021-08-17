@@ -18,7 +18,7 @@
             <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="buyCheck(1)">Kup hru na 1hod</button>
             <button @mouseover="expandCursor" @mouseleave="shrinkCursor" @click="buyCheck(2)">Kup hru navždy</button>
         </div>
-        <div>
+        <form>
             <label for="create-username">Username</label>
             <input id="create-account-username" type="text" placeholder="Username" name="create-username">
             <label for="create-email">Email</label>
@@ -28,14 +28,14 @@
             <label for="create-password2">Repeat password</label>
             <input id="create-account-password-repeat" type="password" placeholder="Repeat password" name="create-password2">
             <button @click="createAccount">Create account</button>
-        </div>
-        <div>
+        </form>
+        <form>
             <label for="login-name-email">Username</label>
             <input id="login-email" type="email" placeholder="Email" name="login-name-email">
             <label for="login-name-password">Password</label>
             <input id="login-password" type="password" placeholder="Password" name="login-name-password">
             <button @click="loginCheck">Log In</button>
-        </div>
+        </form>
         <button id="logout" v-if="loginToken" @click="logOut">Log Out</button>
     </div>
 
