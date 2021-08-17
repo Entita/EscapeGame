@@ -36,6 +36,7 @@
             <input id="login-password" type="password" placeholder="Password" name="login-name-password">
             <button @click="loginCheck">Log In</button>
         </div>
+        <button v-if="loginToken" id="logout">Log Out</button>
     </div>
 
     <script type="text/javascript" src="/default/script.js"></script>
