@@ -62,8 +62,20 @@ var app = new Vue({
             return re.test(String(email).toLowerCase());
         },
         validateForm(email, username, password, password2) {
-            if (((password !== password2) || !this.validateEmail(email)) || username.length < 5 || password.length < 8) return false
-            return true
+            if (((password !== password2) || !this.validateEmail(email)) || username.length < 5 || password.length < 8) {
+                if (username.length < 5) {
+                    alert('Username is too short, atleast 5 characters')
+                } else if (!this.validateEmail(email)) {
+                    alert('Email adress doesn\'t exist')
+                } else if (username.length < 8) {
+                    alert('Password is too short, atleast 8 characters')
+                } else {
+                    alert('Passwords doesn\'t match')
+                }
+                return false
+            } else {
+                return true
+            }
         },
         createAccount() {
             const email = document.getElementById('create-account-email').value,
@@ -99,7 +111,11 @@ var app = new Vue({
         loginCheck() {
             const email = document.getElementById('login-email').value,
                 password = document.getElementById('login-password').value
-            if (password.length > 7 && this.validateEmail(email)) {
+            if (password.length < 8) {
+                alert('Password is too short, atleast 8 characters')
+            } else if (!this.validateEmail(email)) {
+                alert('Email adress doesn\'t exist')
+            } else {
                 fetch('/login', {
                     method: 'POST',
                     headers: {
@@ -113,7 +129,7 @@ var app = new Vue({
                     if (res.ok) return res.json()
                     return res.json().then(json => Promise.reject(json))
                 }).then(({ success }) => {
-                    if (success==='user') {
+                    if (success === 'user') {
                         // User not found
                         alert('User not found')
                     } else if (success) {
@@ -126,9 +142,6 @@ var app = new Vue({
                 }).catch(e => {
                     console.error(e.error)
                 })
-            } else {
-                // Error handler
-                alert('empty')
             }
         }
     }
