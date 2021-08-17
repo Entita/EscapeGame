@@ -135,13 +135,13 @@ var app = new Vue({
                     return res.json().then(json => Promise.reject(json))
                 }).then(({ data }) => {
                     console.log(data)
-                    if (data[0].success === 'user') {
+                    if (data[0] === 'user') {
                         // User not found
                         alert('User not found')
-                    } else if (data[0].success) {
+                    } else if (data[0]) {
                         // Logged in
                         alert('Logged in')
-                        localStorage.setItem('loginToken', data[0].user)
+                        localStorage.setItem('loginToken', data[1])
                         this.loginToken = localStorage.getItem('loginToken')
                     } else {
                         // Wrong password
