@@ -59,12 +59,10 @@ var app = new Vue({
         },
         validateEmail(email) {
             const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            var a = re.test(String(email).toLowerCase())
-            console.log(a)
-            return a;
+            return re.test(String(email).toLowerCase());
         },
         validateForm(email, username, password, password2) {
-            if ((password !== password2) || this.validateEmail(email)) return false
+            if ((password !== password2) || !this.validateEmail(email)) return false
             return true
         },
         createAccount() {
