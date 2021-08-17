@@ -81,6 +81,14 @@ app.post('/creating-checkout-session', async (req, res) => {
     }
 })
 
+app.post('/create-account', (req, res) => {
+    console.log(req)
+})
+
+app.post('/login', (req, res) => {
+    console.log(req)
+})
+
 app.get('/game/:id', (req, res) => {
     const client_key = req.params.id
     client.exists(client_key, (err, reply) => {
