@@ -31,10 +31,23 @@ var app = new Vue({
         /* Login token */
         const loginToken = JSON.parse(localStorage.getItem('loginToken'))
         if (loginToken) {
-            alert('Logged in through a token as ' + this.loginToken.email)
+            // alert('Logged in through a token as ' + this.loginToken.email)
         }
     },
     methods: {
+        sendMessage(text, type) {
+            const messageBox = document.querySelector('.message-container')
+            var message = document.createElement('div')
+            message.classList.add('message', type)
+            message.innerHTML = text
+            messageBox.appendChild(message)
+            setTimeout(() => {
+                message.classList.add('fadeOut')
+                setTimeout(() => {
+                    message.remove()
+                }, 400)
+            }, 2400)
+        },
         expandCursor() {
             const cursor = document.querySelector('.cursor')
             cursor.classList.add('expand')
@@ -71,13 +84,14 @@ var app = new Vue({
         validateForm(email, username, password, password2) {
             if (((password !== password2) || !this.validateEmail(email)) || username.length < 5 || password.length < 8) {
                 if (username.length < 5) {
-                    alert('Username is too short, atleast 5 characters')
+                    this.sendMessage('Username is too short, atleast 5 characters', 'failure')
                 } else if (!this.validateEmail(email)) {
-                    alert('Email adress doesn\'t exist')
+                    this.sendMessage('Email adress doesn\'t exist', 'failure')
                 } else if (username.length < 8) {
                     alert('Password is too short, atleast 8 characters')
+                    this.sendMessage('Password is too short, atleast 8 characters', 'failure')
                 } else {
-                    alert('Passwords doesn\'t match')
+                    this.sendMessage('Passwords doesn\'t match', 'failure')
                 }
                 return false
             } else {
@@ -106,7 +120,7 @@ var app = new Vue({
                     return res.json().then(json => Promise.reject(json))
                 }).then(({ success }) => {
                     if (success) {
-                        alert('Registered')
+                        this.sendMessage('Registered', 'success')
                     }
                 }).catch(e => {
                     console.error(e.error)
@@ -118,9 +132,9 @@ var app = new Vue({
             const email = document.getElementById('login-email').value,
                 password = document.getElementById('login-password').value
             if (password.length < 8) {
-                alert('Password is too short, atleast 8 characters')
+                this.sendMessage('Password is too short, atleast 8 characters', 'failure')
             } else if (!this.validateEmail(email)) {
-                alert('Email adress doesn\'t exist')
+                this.sendMessage('Email adress doesn\'t exist', 'failure')
             } else {
                 fetch('/login', {
                     method: 'POST',
@@ -137,15 +151,15 @@ var app = new Vue({
                 }).then(({ success, user }) => {
                     if (success === 'user') {
                         // User not found
-                        alert('User not found')
+                        this.sendMessage('User not found', 'failure')
                     } else if (success) {
                         // Logged in
-                        alert('Logged in')
+                        this.sendMessage('Logged in', 'success')
                         localStorage.setItem('loginToken', JSON.stringify(user))
                         this.loginToken = user
                     } else {
                         // Wrong password
-                        alert('Wrong password')
+                        this.sendMessage('Wrong password', 'failure')
                     }
                 }).catch(e => {
                     console.error(e.error)
@@ -155,7 +169,7 @@ var app = new Vue({
         logOut() {
             localStorage.removeItem('loginToken')
             this.loginToken = undefined
-            alert('Logged Out')
+            this.sendMessage('Logged out', 'success')
         }
     }
 })

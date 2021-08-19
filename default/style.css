@@ -27,3 +27,50 @@
 #intro button:hover {
     filter: brightness(.8);
 }
+
+/* Messages */
+.message-container {
+    position      : fixed;
+    left          : 50%;
+    transform     : translate(-50%, 0);
+    z-index       : 99;
+    pointer-events: none;
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+}
+
+.message {
+    margin-top   : 4px;
+    padding      : .6rem;
+    color        : white;
+    border-radius: 7px;
+    animation    : messageFadeIn .4s ease-in;
+    transition   : .4s ease-out;
+}
+
+.message.fadeOut {
+    opacity: 0;
+}
+
+.message.info {
+    background-color: rgba(255, 255, 255, .2);
+}
+
+.message.success {
+    background-color: rgba(110, 255, 129, 0.2);
+}
+
+.message.failure {
+    background-color: rgba(255, 105, 105, .4);
+}
+
+@keyframes messageFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

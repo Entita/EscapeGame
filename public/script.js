@@ -141,7 +141,6 @@ var app = new Vue({
             this.toColor("#" + clickedElement, this.colors.white, 'stroke');
         },
         openNote(e) {
-            this.sendMessage('Password to my lock is 5935', 'info')
             // this.visibility.openLockContainer = true
             this.zoomIn(e.target, 2)
         },
