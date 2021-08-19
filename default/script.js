@@ -29,6 +29,7 @@ var app = new Vue({
         })
 
         /* Login token */
+        console.log(localStorage.getItem('loginToken'), JSON.parse(localStorage.getItem('loginToken')))
         const loginToken = JSON.parse(localStorage.getItem('loginToken'))
         if (loginToken) {
             alert('Logged in through a token as ' + this.loginToken.email)
